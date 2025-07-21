@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <link href="https://img.icons8.com/ios-glyphs/30/FEA116/company.png" rel="icon">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="ico">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Login Modal Stylesheet (Embedded) -->
+    <style>
+        /* Login Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #FEA116;
+        }
+
+        /* Login Form Styles */
+        .auth-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .form-toggle {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            color: #FEA116;
+            position: relative;
+        }
+
+        .toggle-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #FEA116;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .form-title {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #FEA116;
+            outline: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .forgot-password a {
+            color: #666;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            color: #FEA116;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #FEA116;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+         .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #FEA116;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none; /* Initially hidden */
+        }
+
+        .success-message {
+            color: #4caf50;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none; /* Initially hidden */
+        }
+
+        .back-to-login {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #FEA116;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="bi-building"></i> Hotel</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link active ">Home</a>
+                        <a href="menu.html" class="nav-item nav-link">Menu</a>
+                        <a href="booking.html" class="nav-item nav-link">Booking</a>
+                        <a href="contact.html" class="nav-item nav-link ">Contact</a>
+                    </div>
+                    <a href="#" class="nav-item nav-link" id="loginLink">
+                        <span class="login-icon">
+                            <i class="fas fa-user-circle" style="color: #FEA116;"></i>
+                        </span>
+                        Login
+                    </a>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container my-5 py-5">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
+                            <a href="menu.html" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A food</a>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                            <img class="img-fluid" src="img/hero.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="img/about-1.jpg">
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/about-2.jpg" style="margin-top: 25%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/about-3.jpg">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">About Us</h5>
+                        <h1 class="mb-4">Welcome to  <i class="text-primary m-0"><i class="bi-building"></i></i> Hotel</h1>
+                        <p class="mb-4">we serve more than just food — we serve happiness. Whether you're here for a quick bite, a family meal, or a special occasion, we promise a warm atmosphere, friendly service, and flavors that leave a lasting impression.</p>
+                        <p class="mb-4">Our chefs use fresh, quality ingredients to prepare delicious dishes inspired by [your cuisine, e.g., traditional Indian recipes, classic Italian flavors, or global street food]. We believe every meal should be a celebration — and we're excited to share that with you.</p>
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">15</h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Years of</p>
+                                        <h6 class="text-uppercase mb-0">Experience</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">50</h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Popular</p>
+                                        <h6 class="text-uppercase mb-0">Master Chefs</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Reservation</a>
+                        <a class="btn btn-link" href="">Privacy Policy</a>
+                        <a class="btn btn-link" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Bengaluru, Electronics city</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 8660303636</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>NEC@.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <p>09AM - 09PM</p>
+                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <p>10AM - 08PM</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Login Modal -->
+        <div id="loginModal" class="modal">
+            <div class="auth-container">
+                <span class="modal-close" id="closeLoginModal">×</span>
+                <div class="form-toggle">
+                    <button class="toggle-btn active" id="login-toggle">Login</button>
+                    <button class="toggle-btn" id="register-toggle">Register</button>
+                </div>
+
+                <div class="form-container">
+                    <!-- Login Form -->
+                    <div class="form active" id="login-form">
+                        <h2 class="form-title">Welcome Back</h2>
+                        <form id="login">
+                            <div class="input-group">
+                                <label for="login-email">Email</label>
+                                <input type="email" id="login-email" name="login_email" placeholder="Enter your email" required>
+                                <div class="error-message" id="login-email-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="login-password">Password</label>
+                                <input type="password" id="login-password" name="login_password" placeholder="Enter your password" required>
+                                <div class="error-message" id="login-password-error"></div>
+                            </div>
+                            <div class="forgot-password">
+                                <a href="#" id="forgot-password-link">Forgot password?</a>
+                            </div>
+                            <button type="submit" class="submit-btn">Login</button>
+                        </form>
+                        <div class="social-login">
+                            <p>Or login with</p>
+                            <div class="social-icons">
+                                <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            Don't have an account? <a href="#" id="switch-to-register">Register</a>
+                        </div>
+                    </div>
+
+                    <!-- Registration Form -->
+                    <div class="form" id="register-form">
+                        <h2 class="form-title">Create Account</h2>
+                        <form id="register">
+                            <div class="input-group">
+                                <label for="register-name">Full Name</label>
+                                <input type="text" id="register-name" name="name" placeholder="Enter your full name" required>
+                                <div class="error-message" id="register-name-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="register-email">Email</label>
+                                <input type="email" id="register-email" name="email" placeholder="Enter your email" required>
+                                <div class="error-message" id="register-email-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="register-phone">Phone Number</label>
+                                <input type="tel" id="register-phone" name="phone" placeholder="Enter your phone number" required>
+                                <div class="error-message" id="register-phone-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="register-password">Password</label>
+                                <input type="password" id="register-password" name="password" placeholder="Create a password" required>
+                                <div class="error-message" id="register-password-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="register-confirm-password">Confirm Password</label>
+                                <input type="password" id="register-confirm-password" name="confirm_password" placeholder="Confirm your password" required>
+                                <div class="error-message" id="register-confirm-error"></div>
+                            </div>
+                            <button type="submit" class="submit-btn">Register</button>
+                        </form>
+                        <div class="social-login">
+                            <p>Or register with</p>
+                            <div class="social-icons">
+                                <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            Already have an account? <a href="#" id="switch-to-login">Login</a>
+                        </div>
+                    </div>
+
+                    <!-- Password Reset Form -->
+                    <div class="form" id="reset-form">
+                        <h2 class="form-title">Reset Password</h2>
+                        <form id="reset-password">
+                            <div class="input-group">
+                                <label for="reset-email">Email</label>
+                                <input type="email" id="reset-email" name="reset_email" placeholder="Enter your registered email" required>
+                                <div class="error-message" id="reset-email-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="new-password">New Password</label>
+                                <input type="password" id="new-password" name="new_password" placeholder="Enter new password" required>
+                                <div class="error-message" id="new-password-error"></div>
+                            </div>
+                            <div class="input-group">
+                                <label for="confirm-new-password">Confirm New Password</label>
+                                <input type="password" id="confirm-new-password" name="confirm_new_password" placeholder="Confirm new password" required>
+                                <div class="error-message" id="confirm-new-password-error"></div>
+                                <div class="success-message" id="reset-success"></div>
+                            </div>
+                            <button type="submit" class="submit-btn">Update Password</button>
+                        </form>
+                        <a href="#" class="back-to-login" id="back-to-login">Back to Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- Closing .container-xxl.bg-white.p-0 -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript and Custom Login Modal Javascript (Embedded) -->
+    <script>
+        // Content from js/main.js (Template's main JS)
+        (function ($) {
+            "use strict";
+
+            var spinner = function () {
+                setTimeout(function () {
+                    if ($('#spinner').length > 0) {
+                        $('#spinner').removeClass('show');
+                    }
+                }, 1);
+            };
+            spinner();
+            new WOW().init();
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 45) {
+                    $('.navbar').addClass('sticky-top shadow-sm');
+                } else {
+                    $('.navbar').removeClass('sticky-top shadow-sm');
+                }
+            });
+
+            const $dropdown = $(".dropdown");
+            const $dropdownToggle = $(".dropdown-toggle");
+            const $dropdownMenu = $(".dropdown-menu");
+            const showClass = "show";
+            $(window).on("load resize", function() {
+                if (this.matchMedia("(min-width: 992px)").matches) {
+                    $dropdown.hover(
+                    function() {
+                        const $this = $(this);
+                        $this.addClass(showClass);
+                        $this.find($dropdownToggle).attr("aria-expanded", "true");
+                        $this.find($dropdownMenu).addClass(showClass);
+                    },
+                    function() {
+                        const $this = $(this);
+                        $this.removeClass(showClass);
+                        $this.find($dropdownToggle).attr("aria-expanded", "false");
+                        $this.find($dropdownMenu).removeClass(showClass);
+                    }
+                    );
+                } else {
+                    $dropdown.off("mouseenter mouseleave");
+                }
+            });
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 300) {
+                    $('.back-to-top').fadeIn('slow');
+                } else {
+                    $('.back-to-top').fadeOut('slow');
+                }
+            });
+            $('.back-to-top').click(function () {
+                $('html, body').animate({scrollTop: 0}, 1500, 'easeInOutExpo');
+                return false;
+            });
+
+            $(".testimonial-carousel").owlCarousel({
+                autoplay: true,
+                smartSpeed: 1000,
+                center: true,
+                margin: 24,
+                dots: true,
+                loop: true,
+                nav : false,
+                responsive: { 0:{ items:1 }, 768:{ items:2 }, 992:{ items:3 } }
+            });
+
+             $('[data-toggle="counter-up"]').counterUp({
+                delay: 10,
+                time: 2000
+            });
+        })(jQuery);
+
+
+        // Login Modal Javascript
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginModal = document.getElementById('loginModal');
+            const loginLink = document.getElementById('loginLink');
+            const closeLoginModal = document.getElementById('closeLoginModal');
+            const loginToggle = document.getElementById('login-toggle');
+            const registerToggle = document.getElementById('register-toggle');
+            const loginFormEl = document.getElementById('login-form');
+            const registerFormEl = document.getElementById('register-form');
+            const resetFormEl = document.getElementById('reset-form');
+            const switchToRegister = document.getElementById('switch-to-register');
+            const switchToLogin = document.getElementById('switch-to-login');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const backToLogin = document.getElementById('back-to-login');
+
+            let modalShown = false;
+            let modalTimer;
+            let retryTimer;
+            const USER_SESSION_KEY = 'currentUserSession'; // Keep for potential session-specific logic
+            const CURRENT_USER_KEY = 'currentUser'; // Main key for logged-in user object
+            const USERS_STORAGE_KEY = 'users'; // For storing all registered users array
+
+            if (!localStorage.getItem(USERS_STORAGE_KEY)) {
+                localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify([]));
+            }
+
+            checkUserLoggedIn();
+
+            function showLoginModal() {
+                const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+                if (!currentUser && !modalShown) {
+                    loginModal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                    modalShown = true;
+                    clearTimeout(modalTimer);
+                    clearTimeout(retryTimer);
+                }
+            }
+
+            function scheduleNextModal() {
+                const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+                if (!currentUser) {
+                    retryTimer = setTimeout(showLoginModal, 10000);
+                }
+            }
+
+            modalTimer = setTimeout(showLoginModal, 2000);
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('showLogin') === 'true') {
+                const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+                if (!currentUser) {
+                    setTimeout(() => { showLoginModal(); }, 500);
+                }
+            }
+
+            loginLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+                if (currentUser) {
+                    // User is logged in, redirect to their dashboard or profile
+                    window.location.href = 'dashboard.html'; // Or profileData.html
+                } else {
+                    showLoginModal();
+                    showLoginFormView();
+                }
+            });
+
+            closeLoginModal.addEventListener('click', function() {
+                loginModal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+                modalShown = false;
+                scheduleNextModal();
+            });
+
+            window.addEventListener('click', function(e) {
+                if (e.target === loginModal) {
+                    loginModal.classList.remove('show');
+                    document.body.style.overflow = 'auto';
+                    modalShown = false;
+                    scheduleNextModal();
+                }
+            });
+
+            function clearAllErrorMessages(formElement) {
+                if (!formElement) return;
+                formElement.querySelectorAll('.error-message').forEach(msg => {
+                    msg.textContent = ''; msg.style.display = 'none';
+                });
+                formElement.querySelectorAll('.success-message').forEach(msg => {
+                    msg.textContent = ''; msg.style.display = 'none';
+                });
+            }
+
+            function showLoginFormView() {
+                loginToggle.classList.add('active'); registerToggle.classList.remove('active');
+                loginFormEl.classList.add('active'); registerFormEl.classList.remove('active'); resetFormEl.classList.remove('active');
+                clearAllErrorMessages(document.getElementById('register'));
+                clearAllErrorMessages(document.getElementById('reset-password'));
+            }
+
+            function showRegisterFormView() {
+                loginToggle.classList.remove('active'); registerToggle.classList.add('active');
+                loginFormEl.classList.remove('active'); registerFormEl.classList.add('active'); resetFormEl.classList.remove('active');
+                clearAllErrorMessages(document.getElementById('login'));
+                clearAllErrorMessages(document.getElementById('reset-password'));
+            }
+
+            function showResetFormView() {
+                loginFormEl.classList.remove('active'); registerFormEl.classList.remove('active'); resetFormEl.classList.add('active');
+                loginToggle.classList.remove('active'); registerToggle.classList.remove('active');
+                document.getElementById('reset-email').value = document.getElementById('login-email').value || '';
+                clearAllErrorMessages(document.getElementById('login'));
+                clearAllErrorMessages(document.getElementById('register'));
+            }
+
+            loginToggle.addEventListener('click', showLoginFormView);
+            registerToggle.addEventListener('click', showRegisterFormView);
+            switchToRegister.addEventListener('click', function(e) { e.preventDefault(); showRegisterFormView(); });
+            switchToLogin.addEventListener('click', function(e) { e.preventDefault(); showLoginFormView(); });
+            forgotPasswordLink.addEventListener('click', function(e) { e.preventDefault(); showResetFormView(); });
+            backToLogin.addEventListener('click', function(e) { e.preventDefault(); showLoginFormView(); });
+
+            function showError(elementId, message) {
+                const element = document.getElementById(elementId);
+                if (element) { element.textContent = message; element.style.display = 'block'; }
+            }
+            function hideAllErrors(formId) {
+                const form = document.getElementById(formId);
+                if(form){
+                    form.querySelectorAll('.error-message').forEach(field => {
+                        field.style.display = 'none'; field.textContent = '';
+                    });
+                }
+            }
+            function showSuccess(elementId, message) {
+                const element = document.getElementById(elementId);
+                if (element) { element.textContent = message; element.style.display = 'block'; }
+            }
+
+            function updateLoginLink(userData) {
+                loginLink.innerHTML = `<span class="login-icon"><i class="fas fa-user-circle" style="color: #FEA116;"></i></span> ${userData.name}`;
+            }
+
+            function checkUserLoggedIn() {
+                const currentUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+                if (currentUser) {
+                    updateLoginLink(currentUser);
+                } else {
+                     loginLink.innerHTML = `<span class="login-icon"><i class="fas fa-user-circle" style="color: #FEA116;"></i></span> Login`;
+                }
+            }
+
+            document.getElementById('login').addEventListener('submit', function(e) {
+                e.preventDefault();
+                hideAllErrors('login');
+                const email = document.getElementById('login-email').value.trim().toLowerCase();
+                const password = document.getElementById('login-password').value;
+                const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY)) || [];
+                const user = users.find(u => u.email === email);
+
+                if (!user) { showError('login-email-error', 'Email not registered'); return; }
+                if (user.password !== password) {
+                    showError('login-password-error', 'Incorrect password'); return;
+                }
+
+                const currentUserData = {
+                    name: user.name,
+                    email: user.email,
+                    phone: user.phone, // Include phone
+                    // Do NOT store password in currentUser object for security
+                };
+
+                localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUserData));
+                localStorage.setItem(USER_SESSION_KEY, JSON.stringify(currentUserData)); // Sync session key
+                
+                alert(`Welcome back, ${user.name}! Login successful.`);
+                loginModal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+                modalShown = false;
+                clearTimeout(modalTimer); clearTimeout(retryTimer);
+                updateLoginLink(currentUserData);
+                window.location.href = 'dashboard.html'; // Redirect to dashboard or profile
+            });
+
+            document.getElementById('register').addEventListener('submit', function(e) {
+                e.preventDefault();
+                hideAllErrors('register');
+                const currentForm = this;
+
+                const name = currentForm.querySelector('#register-name').value.trim();
+                const email = currentForm.querySelector('#register-email').value.trim().toLowerCase();
+                const phone = currentForm.querySelector('#register-phone').value.trim();
+                const password = currentForm.querySelector('#register-password').value;
+                const confirmPassword = currentForm.querySelector('#register-confirm-password').value;
+
+                let isValid = true;
+                if (name.length < 3) { showError('register-name-error', 'Name must be at least 3 characters'); isValid = false; }
+                if (!email.includes('@') || !email.includes('.')) { showError('register-email-error', 'Please enter a valid email'); isValid = false; }
+                if (!/^\d{10}$/.test(phone)) { showError('register-phone-error', 'Please enter a valid 10-digit phone number'); isValid = false; }
+                if (password.length < 6) { showError('register-password-error', 'Password must be at least 6 characters'); isValid = false; }
+                if (password !== confirmPassword) { showError('register-confirm-error', 'Passwords do not match'); isValid = false; }
+
+                if (!isValid) return;
+
+                const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY)) || [];
+
+                if (users.find(u => u.email === email)) {
+                    showError('register-email-error', 'This email address is already registered.');
+                    isValid = false;
+                }
+                if (users.find(u => u.phone === phone)) {
+                    showError('register-phone-error', 'This phone number is already registered.');
+                    isValid = false;
+                }
+
+                if (!isValid) return;
+
+                const newUser = {
+                    name: name,
+                    email: email,
+                    phone: phone, // Store phone number
+                    password: password // In a real app, hash this password
+                };
+                users.push(newUser);
+                localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+
+                alert('Registration successful! You can now login.');
+                currentForm.reset();
+                showLoginFormView();
+                document.getElementById('login-email').value = email;
+            });
+
+            document.getElementById('reset-password').addEventListener('submit', function(e) {
+                e.preventDefault();
+                hideAllErrors('reset-password');
+                const email = document.getElementById('reset-email').value.trim().toLowerCase();
+                const newPassword = document.getElementById('new-password').value;
+                const confirmNewPassword = document.getElementById('confirm-new-password').value;
+                const users = JSON.parse(localStorage.getItem(USERS_STORAGE_KEY)) || [];
+                const userIndex = users.findIndex(u => u.email === email);
+
+                if (userIndex === -1) { showError('reset-email-error', 'Email not registered'); return; }
+                if (newPassword.length < 6) { showError('new-password-error', 'Password must be at least 6 characters'); return; }
+                if (newPassword !== confirmNewPassword) { showError('confirm-new-password-error', 'Passwords do not match'); return; }
+
+                users[userIndex].password = newPassword;
+                localStorage.setItem(USERS_STORAGE_KEY, JSON.stringify(users));
+
+                // If this user was the currently logged-in one, clear their session to force re-login with new password
+                const loggedInUser = JSON.parse(localStorage.getItem(CURRENT_USER_KEY));
+                if (loggedInUser && loggedInUser.email === email) {
+                    localStorage.removeItem(CURRENT_USER_KEY);
+                    localStorage.removeItem(USER_SESSION_KEY);
+                    checkUserLoggedIn(); // Update nav link to "Login"
+                }
+                
+                showSuccess('reset-success', 'Password updated successfully! Please login with your new password.');
+                document.getElementById('reset-password').reset();
+                setTimeout(() => {
+                    showLoginFormView();
+                    document.getElementById('login-email').value = email;
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>

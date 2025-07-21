@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Bootstrap Restaurant Template</title>
+    <link rel="icon" type="img/png" href="./img/RS.png">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="ico">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+  
+
+    <!-- Login Modal Stylesheet -->
+    <style>
+        /* Login Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .modal-close:hover {
+            color: #FEA116;
+        }
+
+        /* Login Form Styles */
+        .auth-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .form-toggle {
+            display: flex;
+            border-bottom: 1px solid #eee;
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            color: #FEA116;
+            position: relative;
+        }
+
+        .toggle-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #FEA116;
+        }
+
+        .form-container {
+            padding: 30px;
+        }
+
+        .form {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form.active {
+            display: block;
+        }
+
+        .form-title {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #FEA116;
+            outline: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 15px;
+        }
+
+        .forgot-password a {
+            color: #666;
+            font-size: 13px;
+            text-decoration: none;
+        }
+
+        .forgot-password a:hover {
+            color: #FEA116;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: #FEA116;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .social-login {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .social-login p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .social-login p::before,
+        .social-login p::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30%;
+            height: 1px;
+            background-color: #ddd;
+        }
+
+        .social-login p::before {
+            left: 0;
+        }
+
+        .social-login p::after {
+            right: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-footer a {
+            color: #FEA116;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .error-message {
+            color: #f44336;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            color: #4caf50;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .back-to-login {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #FEA116;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="fa fa-utensils me-3"></i>Restoran</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link ">Home</a>
+                        <a href="menu.html" class="nav-item nav-link">Menu</a>
+                        <a href="booking.html" class="nav-item nav-link">Booking</a>
+                        <a href="contact.html" class="nav-item nav-link ">Contact</a>
+                    </div>
+                    
+
+                   
+    
+                 <a href="" class="nav-item nav-link" id="loginLink">
+    <span class="login-icon">
+        <i class="fas fa-user-circle" style="color: #FEA116;"></i>
+    </span>
+    Login
+</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container my-5 py-5">
+                    <div class="row align-items-center g-5">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="display-3 text-white animated slideInLeft">Enjoy Our<br>Delicious Meal</h1>
+                            <a href="menu.html" class="btn btn-primary py-sm-3 px-sm-5 me-3 animated slideInLeft">Book A food</a>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-end overflow-hidden">
+                            <img class="img-fluid" src="img/hero.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.1s" src="img/about-1.jpg">
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.3s" src="img/about-2.jpg" style="margin-top: 25%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.5s" src="img/about-3.jpg">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.7s" src="img/about-4.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <h5 class="section-title ff-secondary text-start text-primary fw-normal">About Us</h5>
+                        <h1 class="mb-4">Welcome to <i class="fa fa-utensils text-primary me-2"></i>Restoran</h1>
+                        <p class="mb-4">we serve more than just food — we serve happiness. Whether you’re here for a quick bite, a family meal, or a special occasion, we promise a warm atmosphere, friendly service, and flavors that leave a lasting impression.</p>
+                        <p class="mb-4">Our chefs use fresh, quality ingredients to prepare delicious dishes inspired by [your cuisine, e.g., traditional Indian recipes, classic Italian flavors, or global street food]. We believe every meal should be a celebration — and we’re excited to share that with you.</p>
+                        <div class="row g-4 mb-4">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">15</h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Years of</p>
+                                        <h6 class="text-uppercase mb-0">Experience</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center border-start border-5 border-primary px-3">
+                                    <h1 class="flex-shrink-0 display-5 text-primary mb-0" data-toggle="counter-up">50</h1>
+                                    <div class="ps-4">
+                                        <p class="mb-0">Popular</p>
+                                        <h6 class="text-uppercase mb-0">Master Chefs</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary py-3 px-5 mt-2" href="">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+       
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Reservation</a>
+                        <a class="btn btn-link" href="">Privacy Policy</a>
+                        <a class="btn btn-link" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Bengaluru, Electronics city</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 8660303636</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>NEC@.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <p>09AM - 09PM</p>
+                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <p>10AM - 08PM</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+                            Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a><br><br>
+                            Distributed By <a class="border-bottom" href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="auth-container">
+            <span class="modal-close" id="closeLoginModal">&times;</span>
+            <div class="form-toggle">
+                <button class="toggle-btn active" id="login-toggle">Login</button>
+                <button class="toggle-btn" id="register-toggle">Register</button>
+            </div>
+
+            <div class="form-container">
+                <!-- Login Form -->
+                <div class="form active" id="login-form">
+                    <h2 class="form-title">Welcome Back</h2>
+                    <form id="login">
+                        <div class="input-group">
+                            <label for="login-email">Email</label>
+                            <input type="email" id="login-email" placeholder="Enter your email" required>
+                            <div class="error-message" id="login-email-error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="login-password">Password</label>
+                            <input type="password" id="login-password" placeholder="Enter your password" required>
+                            <div class="error-message" id="login-password-error"></div>
+                        </div>
+                        <div class="forgot-password">
+                            <a href="#" id="forgot-password-link">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                    </form>
+
+                    <div class="social-login">
+                        <p>Or login with</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        Don't have an account? <a href="#" id="switch-to-register">Register</a>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div class="form" id="register-form">
+                    <h2 class="form-title">Create Account</h2>
+                    <form id="register">
+                        <div class="input-group">
+                            <label for="register-name">Full Name</label>
+                            <input type="text" id="register-name" placeholder="Enter your full name" required>
+                            <div class="error-message" id="register-name-error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-email">Email</label>
+                            <input type="email" id="register-email" placeholder="Enter your email" required>
+                            <div class="error-message" id="register-email-error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-password">Password</label>
+                            <input type="password" id="register-password" placeholder="Create a password" required>
+                            <div class="error-message" id="register-password-error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="register-confirm-password">Confirm Password</label>
+                            <input type="password" id="register-confirm-password" placeholder="Confirm your password" required>
+                            <div class="error-message" id="register-confirm-error"></div>
+                        </div>
+                        <button type="submit" class="submit-btn">Register</button>
+                    </form>
+
+                    <div class="social-login">
+                        <p>Or register with</p>
+                        <div class="social-icons">
+                            <a href="#" class="social-icon"><i class="fab fa-google"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="form-footer">
+                        Already have an account? <a href="#" id="switch-to-login">Login</a>
+                    </div>
+                </div>
+
+                <!-- Password Reset Form -->
+                <div class="form" id="reset-form">
+                    <h2 class="form-title">Reset Password</h2>
+                    <form id="reset-password">
+                        <div class="input-group">
+                            <label for="reset-email">Email</label>
+                            <input type="email" id="reset-email" placeholder="Enter your registered email" required>
+                            <div class="error-message" id="reset-email-error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" placeholder="Enter new password" required>
+                            <div class="error-message" id="new-password-error"></div>
+                        </div>
+                        <div class="input-group">
+                            <label for="confirm-new-password">Confirm New Password</label>
+                            <input type="password" id="confirm-new-password" placeholder="Confirm new password" required>
+                            <div class="error-message" id="confirm-new-password-error"></div>
+                            <div class="success-message" id="reset-success"></div>
+                        </div>
+                        <button type="submit" class="submit-btn">Update Password</button>
+                    </form>
+                    <a href="#" class="back-to-login" id="back-to-login">Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Login Modal Javascript -->
+    <script>
+ document.addEventListener('DOMContentLoaded', function() {
+    // Get modal elements
+    const loginModal = document.getElementById('loginModal');
+    const loginLink = document.getElementById('loginLink');
+    const closeLoginModal = document.getElementById('closeLoginModal');
+    
+    // Get form toggle elements
+    const loginToggle = document.getElementById('login-toggle');
+    const registerToggle = document.getElementById('register-toggle');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const resetForm = document.getElementById('reset-form');
+    const switchToRegister = document.getElementById('switch-to-register');
+    const switchToLogin = document.getElementById('switch-to-login');
+    const forgotPasswordLink = document.getElementById('forgot-password-link');
+    const backToLogin = document.getElementById('back-to-login');
+    
+    // Check if user is already logged in
+    checkUserLoggedIn();
+    
+    // Check URL parameters to see if we should show login modal
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('showLogin') === 'true') {
+        // Check if user is logged in
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (!currentUser) {
+            // Show login modal if redirected from dashboard logout
+            setTimeout(() => {
+                loginModal.classList.add('show');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+            }, 500); // Small delay to ensure page is fully loaded
+        }
+    }
+    
+    // Initialize users array in localStorage if it doesn't exist
+    if (!localStorage.getItem('users')) {
+        localStorage.setItem('users', JSON.stringify([]));
+    }
+    
+    // Open the login modal when the login link is clicked
+    loginLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Check if user is logged in
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        
+        if (currentUser) {
+            // If already logged in, redirect to dashboard
+            window.location.href = 'dashboard.html';
+        } else {
+            // Show login modal if not logged in
+            loginModal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+    });
+    
+    // Close the login modal when the close button is clicked
+    closeLoginModal.addEventListener('click', function() {
+        loginModal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    });
+    
+    // Close the modal when clicking outside of it
+    window.addEventListener('click', function(e) {
+        if (e.target === loginModal) {
+            loginModal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+    });
+    
+    // Toggle to login form
+    function showLoginForm() {
+        loginToggle.classList.add('active');
+        registerToggle.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+        resetForm.classList.remove('active');
+    }
+    
+    // Toggle to register form
+    function showRegisterForm() {
+        loginToggle.classList.remove('active');
+        registerToggle.classList.add('active');
+        loginForm.classList.remove('active');
+        registerForm.classList.add('active');
+        resetForm.classList.remove('active');
+    }
+    
+    // Toggle to reset form
+    function showResetForm() {
+        loginForm.classList.remove('active');
+        registerForm.classList.remove('active');
+        resetForm.classList.add('active');
+        loginToggle.classList.remove('active');
+        registerToggle.classList.remove('active');
+        document.getElementById('reset-email').value = document.getElementById('login-email').value || '';
+    }
+    
+    // Event listeners for toggle buttons
+    loginToggle.addEventListener('click', showLoginForm);
+    registerToggle.addEventListener('click', showRegisterForm);
+    switchToRegister.addEventListener('click', function(e) {
+        e.preventDefault();
+        showRegisterForm();
+    });
+    switchToLogin.addEventListener('click', function(e) {
+        e.preventDefault();
+        showLoginForm();
+    });
+    forgotPasswordLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        showResetForm();
+    });
+    backToLogin.addEventListener('click', function(e) {
+        e.preventDefault();
+        showLoginForm();
+    });
+    
+    // Show error message
+    function showError(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.style.display = 'block';
+    }
+    
+    // Hide error message
+    function hideError(elementId) {
+        const element = document.getElementById(elementId);
+        element.style.display = 'none';
+    }
+    
+    // Show success message
+    function showSuccess(elementId, message) {
+        const element = document.getElementById(elementId);
+        element.textContent = message;
+        element.style.display = 'block';
+    }
+    
+    // Update login link to show user is logged in
+    function updateLoginLink(userData) {
+        loginLink.innerHTML = `<span class="login-icon"><i class="fas fa-user-circle" style="color: #FEA116;"></i></span> ${userData.name}`;
+    }
+    
+    // Check if user is already logged in
+    function checkUserLoggedIn() {
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        if (currentUser) {
+            updateLoginLink(currentUser);
+        }
+    }
+    
+    // Form submission - Login
+    document.getElementById('login').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        // Clear previous errors
+        hideError('login-email-error');
+        hideError('login-password-error');
+        
+        // Get users from localStorage
+        const users = JSON.parse(localStorage.getItem('users'));
+        
+        // Find user with matching email
+        const user = users.find(user => user.email === email);
+        
+        if (!user) {
+            showError('login-email-error', 'Email not registered');
+            return;
+        }
+        
+        if (user.password !== password) {
+            showError('login-password-error', 'Incorrect password');
+            return;
+        }
+        
+        // Save current user to localStorage
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        
+        // Successful login
+        alert(`Welcome back, ${user.name}! Login successful.`);
+        loginModal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+        
+        // Update login link to show user is logged in
+        updateLoginLink(user);
+        
+        // Redirect to dashboard
+        window.location.href = 'dashboard.html';
+    });
+    
+    // Form submission - Register
+    document.getElementById('register').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('register-name').value;
+        const email = document.getElementById('register-email').value;
+        const password = document.getElementById('register-password').value;
+        const confirmPassword = document.getElementById('register-confirm-password').value;
+        
+        // Clear previous errors
+        hideError('register-name-error');
+        hideError('register-email-error');
+        hideError('register-password-error');
+        hideError('register-confirm-error');
+        
+        // Validation
+        if (name.length < 3) {
+            showError('register-name-error', 'Name must be at least 3 characters');
+            return;
+        }
+        
+        if (!email.includes('@') || !email.includes('.')) {
+            showError('register-email-error', 'Please enter a valid email');
+            return;
+        }
+        
+        if (password.length < 6) {
+            showError('register-password-error', 'Password must be at least 6 characters');
+            return;
+        }
+        
+        if (password !== confirmPassword) {
+            showError('register-confirm-error', 'Passwords do not match');
+            return;
+        }
+        
+        // Get users from localStorage
+        const users = JSON.parse(localStorage.getItem('users'));
+        
+        // Check if email already exists
+        if (users.some(user => user.email === email)) {
+            showError('register-email-error', 'Email already registered');
+            return;
+        }
+        
+        // Create new user object
+        const newUser = {
+            name: name,
+            email: email,
+            password: password
+        };
+        
+        // Add new user
+        users.push(newUser);
+        
+        // Save back to localStorage
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        // Set as current user
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+        
+        // Successful registration
+        alert(`Registration successful, ${name}! You're now logged in.`);
+        
+        // Clear form
+        document.getElementById('register').reset();
+        
+        // Close modal
+        loginModal.classList.remove('show');
+        document.body.style.overflow = 'auto';
+        
+        // Update login link
+        updateLoginLink(newUser);
+        
+        // Redirect to dashboard
+        window.location.href = 'dashboard.html';
+    });
+    
+    // Form submission - Password Reset
+    document.getElementById('reset-password').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('reset-email').value;
+        const newPassword = document.getElementById('new-password').value;
+        const confirmNewPassword = document.getElementById('confirm-new-password').value;
+        
+        // Clear previous errors
+        hideError('reset-email-error');
+        hideError('new-password-error');
+        hideError('confirm-new-password-error');
+        hideError('reset-success');
+
+        // Get users from localStorage
+        const users = JSON.parse(localStorage.getItem('users'));
+        
+        // Find user with matching email
+        const userIndex = users.findIndex(user => user.email === email);
+        
+        // Validate email exists
+        if (userIndex === -1) {
+            showError('reset-email-error', 'Email not registered');
+            return;
+        }
+        
+        // Validate new password
+        if (newPassword.length < 6) {
+            showError('new-password-error', 'Password must be at least 6 characters');
+            return;
+        }
+        
+        // Validate password match
+        if (newPassword !== confirmNewPassword) {
+            showError('confirm-new-password-error', 'Passwords do not match');
+            return;
+        }
+        
+        // Update password in the user record
+        users[userIndex].password = newPassword;
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        // Show success message
+        showSuccess('reset-success', 'Password updated successfully!');
+        
+        // Clear form fields
+        document.getElementById('reset-password').reset();
+        
+        // Auto-return to login after delay
+        setTimeout(() => {
+            showLoginForm();
+        }, 1500);
+    });
+    
+    // Handle spinner hiding
+    window.addEventListener('load', function() {
+        const spinner = document.getElementById('spinner');
+        if (spinner) {
+            setTimeout(function() {
+                spinner.classList.remove('show');
+            }, 1000);
+        }
+    });
+});
+    </script>
+</body>
+
+</html>

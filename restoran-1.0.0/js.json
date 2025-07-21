@@ -1,0 +1,5 @@
+POST http://localhost:5000/api/user
+{
+    "email": "user@example.com",
+    "number": "1234567890"
+}

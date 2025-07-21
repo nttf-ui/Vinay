@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Restoran - Food Menu</title>
+    <!-- Favicon (Corrected and consolidated) -->
+    <link href="https://img.icons8.com/ios-glyphs/30/FEA116/company.png" rel="icon"> <!-- MODIFIED FAVICON -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="index.html" class="navbar-brand p-0">
+                    <h1 class="text-primary m-0"><i class="bi-building me-3"></i>Hotel</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="menu.html" class="nav-item nav-link active">Menu</a>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="dashboard.html" class="nav-item nav-link">Dashboard</a>
+                        <a href="dashboard.html?view=cart" class="nav-item nav-link">Cart <span id="cart-count-display" class="badge bg-primary ms-1">0</span></a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl py-5 bg-dark hero-header mb-5">
+                <div class="container text-center my-5 pt-5 pb-4">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Food Menu</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Menu</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- Menu Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <h5 class="section-title ff-secondary text-center text-primary fw-normal">Food Menu</h5>
+                    <h1 class="mb-5">Most Popular Items</h1>
+                </div>
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.1s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 ms-0 pb-3 active" data-bs-toggle="pill" href="#tab-1">
+                                <i class="fa fa-coffee fa-2x text-primary"></i>
+                                <div class="ps-3">
+                                    <small class="text-body">Popular</small>
+                                    <h6 class="mt-n1 mb-0">Breakfast</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 pb-3" data-bs-toggle="pill" href="#tab-2">
+                                <i class="fa fa-hamburger fa-2x text-primary"></i>
+                                <div class="ps-3">
+                                    <small class="text-body">Special</small>
+                                    <h6 class="mt-n1 mb-0">Lunch</h6>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="d-flex align-items-center text-start mx-3 me-0 pb-3" data-bs-toggle="pill" href="#tab-3">
+                                <i class="fa fa-utensils fa-2x text-primary"></i>
+                                <div class="ps-3">
+                                    <small class="text-body">Lovely</small>
+                                    <h6 class="mt-n1 mb-0">Dinner</h6>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2021/06/masala-dosa-2.jpg" alt="Masala Dosa" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Masala Dosa</span>
+                                                <span class="text-primary">₹75</span>
+                                            </h5>
+                                            <small class="fst-italic">Masala dosa spicy and tasty, mix with chutney and add Aloo Masala.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2021/07/idli-vada-recipe.jpg" alt="Idli Vada" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Idli Vada</span>
+                                                <span class="text-primary">₹50</span>
+                                            </h5>
+                                            <small class="fst-italic">Spicy and tasty mix with chutney.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2009/11/poha-recipe-1.jpg" alt="Poha" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Poha</span>
+                                                <span class="text-primary">₹60</span>
+                                            </h5>
+                                            <small class="fst-italic">Light and fluffy flattened rice, tempered with spices and vegetables.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2013/01/upma-recipe-1.jpg" alt="Upma" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Upma</span>
+                                                <span class="text-primary">₹65</span>
+                                            </h5>
+                                            <small class="fst-italic">Savory semolina porridge cooked with vegetables and spices.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2009/08/aloo-paratha-recipe-2.jpg" alt="Aloo Paratha" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Aloo Paratha</span>
+                                                <span class="text-primary">₹80</span>
+                                            </h5>
+                                            <small class="fst-italic">Whole wheat flatbread stuffed with spiced mashed potatoes, served with curd.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2014/09/poori-bhaji-recipe-1.jpg" alt="Poori Sabji" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Poori Sabji</span>
+                                                <span class="text-primary">₹90</span>
+                                            </h5>
+                                            <small class="fst-italic">Deep-fried bread (poori) served with a spiced potato curry (sabji).</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.pexels.com/photos/2122280/pexels-photo-2122280.jpeg?auto=compress&cs=tinysrgb&w=160&h=100&dpr=1" alt="Egg Omelette" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Egg Omelette</span>
+                                                <span class="text-primary">₹70</span>
+                                            </h5>
+                                            <small class="fst-italic">Fluffy omelette made with 2 eggs, served with toast.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=160&h=100&dpr=1" alt="Fruit Platter" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Fresh Fruit Platter</span>
+                                                <span class="text-primary">₹120</span>
+                                            </h5>
+                                            <small class="fst-italic">Assortment of seasonal fresh fruits.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://c.ndtvimg.com/2020-03/6q01a28_dosa_625x300_27_March_20.jpg" alt="Special Masala Dosa" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Special Masala Dosa</span>
+                                                <span class="text-primary">₹300</span>
+                                            </h5>
+                                            <small class="fst-italic">Extra large dosa with special filling.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2012/08/north-indian-thali.jpg" alt="Veg Thali" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Veg Thali</span>
+                                                <span class="text-primary">₹180</span>
+                                            </h5>
+                                            <small class="fst-italic">A complete meal with rice, roti, dal, 2 vegetable curries, salad, and sweet.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/12/chicken-biryani.jpg" alt="Chicken Biryani" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Chicken Biryani</span>
+                                                <span class="text-primary">₹250</span>
+                                            </h5>
+                                            <small class="fst-italic">Aromatic basmati rice cooked with tender chicken and exotic spices.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.indianhealthyrecipes.com/wp-content/uploads/2014/11/paneer-butter-masala-recipe.jpg" alt="Paneer Butter Masala" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Paneer Butter Masala</span>
+                                                <span class="text-primary">₹220</span>
+                                            </h5>
+                                            <small class="fst-italic">Creamy and rich paneer curry, served with 2 Naans.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://vegecravings.com/wp-content/uploads/2017/02/dal-makhani-recipe-step-by-step-instructions-7.jpg" alt="Dal Makhani with Rice" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Dal Makhani & Rice</span>
+                                                <span class="text-primary">₹200</span>
+                                            </h5>
+                                            <small class="fst-italic">Creamy black lentils and kidney beans, served with steamed basmati rice.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.kannammacooks.com/wp-content/uploads/meen-kuzhambu-fish-curry-recipe-1-3.jpg" alt="Fish Curry with Rice" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Fish Curry & Rice</span>
+                                                <span class="text-primary">₹280</span>
+                                            </h5>
+                                            <small class="fst-italic">Tangy and spicy fish curry (Rohu/Katla) served with steamed rice.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.indianhealthyrecipes.com/wp-content/uploads/2022/03/veg-pulao-vegetable-pulao.jpg" alt="Vegetable Pulao with Raita" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Vegetable Pulao & Raita</span>
+                                                <span class="text-primary">₹190</span>
+                                            </h5>
+                                            <small class="fst-italic">Aromatic rice cooked with mixed vegetables and spices, served with cooling raita.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="#" alt="Chicken Curry with Roti" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Chicken Curry & Roti</span>
+                                                <span class="text-primary">₹260</span>
+                                            </h5>
+                                            <small class="fst-italic">Homestyle chicken curry served with 2 Tawa Rotis.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            <div class="row g-4">
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8YnVyZ2VyfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=100&q=60" alt="Dinner Delight Burger" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Dinner Delight Burger</span>
+                                                <span class="text-primary">₹170</span>
+                                            </h5>
+                                            <small class="fst-italic">Perfect burger for a hearty dinner.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.unsplash.com/photo-1598214996840-90b8f9905158?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bXVzaHJvb20lMjByaXNvdHRvfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=100&q=60" alt="Mushroom Risotto" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Mushroom Risotto</span>
+                                                <span class="text-primary">₹280</span>
+                                            </h5>
+                                            <small class="fst-italic">Creamy Italian rice cooked with mushrooms and parmesan cheese.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JpbGxlZCUyMHNhbG1vbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=100&q=60" alt="Grilled Salmon" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Grilled Salmon</span>
+                                                <span class="text-primary">₹450</span>
+                                            </h5>
+                                            <small class="fst-italic">Perfectly grilled salmon fillet served with steamed vegetables and lemon butter sauce.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.unsplash.com/photo-1621996346565-e326e7e2485e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8Y2hpY2tlbiUyMGFsZnJlZG98ZW58MHx8MHx8&auto=format&fit=crop&w=100&q=60" alt="Chicken Alfredo Pasta" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Chicken Alfredo Pasta</span>
+                                                <span class="text-primary">₹320</span>
+                                            </h5>
+                                            <small class="fst-italic">Fettuccine pasta tossed in a creamy Alfredo sauce with grilled chicken.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.indianhealthyrecipes.com/wp-content/uploads/2021/05/rogan-josh-recipe.jpg" alt="Lamb Rogan Josh" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Lamb Rogan Josh</span>
+                                                <span class="text-primary">₹480</span>
+                                            </h5>
+                                            <small class="fst-italic">Aromatic Kashmiri lamb curry, slow-cooked with spices, served with Naan.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://images.unsplash.com/photo-1619895092473-491997acde90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8dmVnZXRhYmxlJTIwbGFzYWduYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=100&q=60" alt="Vegetable Lasagna" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Vegetable Lasagna</span>
+                                                <span class="text-primary">₹350</span>
+                                            </h5>
+                                            <small class="fst-italic">Layers of pasta, mixed vegetables, cheese, and béchamel sauce, baked to perfection.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.indianhealthyrecipes.com/wp-content/uploads/2022/06/tandoori-chicken.jpg" alt="Tandoori Chicken" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Tandoori Chicken</span>
+                                                <span class="text-primary">₹300 (Half) / ₹550 (Full)</span>
+                                            </h5>
+                                            <small class="fst-italic">Chicken marinated in yogurt and spices, roasted in a tandoor.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                 <div class="col-lg-6">
+                                    <div class="d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid rounded" src="https://www.vegrecipesofindia.com/wp-content/uploads/2013/10/mixed-vegetable-curry-recipe-1.jpg" alt="Mixed Veg Curry & Jeera Rice" style="width: 80px;">
+                                        <div class="w-100 d-flex flex-column text-start ps-4">
+                                            <h5 class="d-flex justify-content-between border-bottom pb-2">
+                                                <span>Mixed Veg Curry & Jeera Rice</span>
+                                                <span class="text-primary">₹240</span>
+                                            </h5>
+                                            <small class="fst-italic">Seasonal mixed vegetables in a flavorful gravy, served with cumin-tempered rice.</small>
+                                            <div class="d-flex border-top mt-2 pt-2">
+                                                <small class="w-50 text-center border-end py-2">
+                                                    <a class="text-body" href="#"><i class="fa fa-eye text-primary me-2"></i>View detail</a>
+                                                </small>
+                                                <small class="w-50 text-center py-2">
+                                                    <a class="text-body add-to-cart-btn" href="#"><i class="fa fa-shopping-bag text-primary me-2"></i>Add to cart</a>
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Menu End -->
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+            <div class="container py-5">
+                <div class="row g-5">
+                     <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                        <a class="btn btn-link" href="about.html">About Us</a>
+                        <a class="btn btn-link" href="contact.html">Contact Us</a>
+                        <a class="btn btn-link" href="booking.html">Reservation</a>
+                        <a class="btn btn-link" href="#">Privacy Policy</a>
+                        <a class="btn btn-link" href="#">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Bengaluru, Electronics City</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 8660303636</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <p>09AM - 09PM</p>
+                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <p>10AM - 08PM</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                        <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            © <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="index.html">Home</a>
+                                <a href="#">Cookies</a>
+                                <a href="#">Help</a>
+                                <a href="#">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Cart Functionality Script -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Function to update the cart count in the navbar
+        function updateCartCountDisplay() {
+            const cartCountElement = document.getElementById('cart-count-display');
+            if (cartCountElement) {
+                let totalItems = 0;
+                cart.forEach(item => {
+                    totalItems += item.quantity;
+                });
+                cartCountElement.textContent = totalItems;
+            }
+        }
+
+        function addToCart(itemName, price, mealType) {
+            const existingItem = cart.find(item => item.name === itemName && item.mealType === mealType);
+
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({ name: itemName, price: price, quantity: 1, mealType: mealType });
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(itemName + ' (' + mealType + ') added to cart!');
+            updateCartCountDisplay(); // Update count after adding
+        }
+
+        document.querySelectorAll('.add-to-cart-btn').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const itemContainer = this.closest('.d-flex.align-items-center');
+                const tabPane = this.closest('.tab-pane.fade');
+
+                let mealType = 'General';
+                if (tabPane) {
+                    if (tabPane.id === 'tab-1') mealType = 'Breakfast';
+                    else if (tabPane.id === 'tab-2') mealType = 'Lunch';
+                    else if (tabPane.id === 'tab-3') mealType = 'Dinner';
+                }
+
+                if (itemContainer) {
+                    const itemNameElement = itemContainer.querySelector('h5 > span:first-child');
+                    const priceElement = itemContainer.querySelector('h5 > span.text-primary');
+
+                    if (itemNameElement && priceElement) {
+                        const itemName = itemNameElement.textContent.trim();
+                        const priceText = priceElement.textContent.replace('₹', '').trim();
+
+                        let price;
+                        let finalItemName = itemName; // Store the potentially modified item name
+
+                        if (priceText.includes('/')) {
+                            // For items like Tandoori Chicken, prompt user or take first price.
+                            // For simplicity here, we'll take the first price and its corresponding description.
+                            const priceParts = priceText.split('/');
+                            const firstPricePart = priceParts[0].trim(); // e.g., "300 (Half)"
+                            
+                            price = parseFloat(firstPricePart.match(/[\d.]+/)[0]); // Extracts "300"
+                            
+                            // Attempt to extract the variant name like "(Half)"
+                            const variantMatch = firstPricePart.match(/\(([^)]+)\)/);
+                            if (variantMatch && variantMatch[1]) {
+                                finalItemName = itemName + " (" + variantMatch[1] + ")"; // e.g., "Tandoori Chicken (Half)"
+                            }
+                            // If you want to allow selection, this is where you'd show a modal.
+                            // For now, it defaults to the first option.
+                        } else {
+                            price = parseFloat(priceText);
+                        }
+
+                        if (finalItemName && !isNaN(price)) {
+                            addToCart(finalItemName, price, mealType);
+                        } else {
+                            console.error("Could not extract valid item name or price. Name:", finalItemName, "Price text:", priceText, "Parsed Price:", price);
+                        }
+                    } else {
+                        console.error("Could not find item name or price elements within container.");
+                    }
+                } else {
+                    console.error("Could not find item container for 'Add to cart' button.");
+                }
+            });
+        });
+
+        const spinner = document.getElementById('spinner');
+        if (spinner && spinner.classList.contains('show')) {
+            setTimeout(() => {
+                spinner.classList.remove('show');
+            }, 100); // Reduced timeout for faster loading impression
+        }
+
+        // Initial cart count update on page load
+        updateCartCountDisplay();
+    });
+    </script>
+</body>
+</html>

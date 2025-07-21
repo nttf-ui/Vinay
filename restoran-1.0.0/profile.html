@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Profile Data</title>
+    <link href="https://img.icons8.com/ios-glyphs/30/FEA116/company.png" rel="icon">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="ico">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet (Optional, if needed for profile page layout) -->
+    <!-- <link href="lib/animate/animate.min.css" rel="stylesheet"> -->
+    <!-- <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
+    <!-- <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" /> -->
+
+    <!-- Customized Bootstrap Stylesheet (Optional, if needed) -->
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #FFD700, #FEA116); /* Adjusted gradient */
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            max-width: 1000px; /* Adjusted width */
+            width: 100%;
+            display: flex;
+            overflow: hidden;
+        }
+        .profile-sidebar {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 280px; /* Adjusted width */
+            border-right: 1px solid #e5e7eb;
+        }
+        .profile-image-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
+        .photo-edit-overlay {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #FEA116;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 16px;
+            border: 3px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.2s;
+        }
+        .photo-edit-overlay:hover {
+            background: #e08e0f; /* Darker shade for hover */
+            transform: scale(1.1);
+        }
+        .photo-upload-input {
+            display: none;
+        }
+        .photo-options {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            padding: 8px 0;
+            min-width: 150px;
+            z-index: 1000;
+            display: none;
+        }
+        .photo-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #374151;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .photo-option:hover {
+            background: #f3f4f6;
+        }
+        .profile-name {
+            font-size: 22px; /* Adjusted size */
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .profile-email {
+            color: #6b7280;
+            font-size: 14px;
+            text-align: center;
+        }
+        .main-content {
+            flex: 1;
+            padding: 30px 40px; /* Adjusted padding */
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px; /* Adjusted margin */
+        }
+        .page-title {
+            font-size: 26px; /* Adjusted size */
+            font-weight: 600;
+            color: #1f2937;
+        }
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .tab-btn {
+            padding: 10px 18px; /* Adjusted padding */
+            border: 1px solid #d1d5db;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #6b7280;
+            transition: all 0.2s;
+        }
+        .tab-btn.active {
+            background: #FEA116;
+            color: white;
+            border-color: #FEA116;
+        }
+        .form-section {
+            margin-bottom: 25px; /* Adjusted margin */
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 18px; /* Adjusted margin */
+        }
+        .form-group {
+            flex: 1;
+        }
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px; /* Adjusted margin */
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px 14px; /* Adjusted padding */
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1f2937;
+            background: white;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-input:read-only {
+            background-color: #f3f4f6;
+            cursor: not-allowed;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color:#FEA116;
+            box-shadow: 0 0 0 3px rgba(254, 161, 22, 0.2); /* Adjusted shadow color */
+        }
+        .form-input::placeholder {
+            color: #9ca3af;
+        }
+        .experience-section {
+            display: none;
+        }
+        .experience-section.active {
+            display: block;
+        }
+        .experience-textarea {
+            width: 100%;
+            min-height: 100px; /* Adjusted height */
+            padding: 10px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            color: #1f2937;
+            background: white;
+            resize: vertical;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .experience-textarea:focus {
+            outline: none;
+            border-color: #FEA116;
+            box-shadow: 0 0 0 3px rgba(254, 161, 22, 0.2);
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: flex-start; /* Align to start */
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .save-btn, .back-btn {
+            background: #FEA116;
+            color: white;
+            border: none;
+            padding: 12px 28px; /* Adjusted padding */
+            border-radius: 8px;
+            font-size: 15px; /* Adjusted size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 14px 0 rgba(254, 161, 22, 0.3);
+        }
+        .back-btn {
+            background: #6c757d; /* A different color for back button */
+             box-shadow: 0 4px 14px 0 rgba(108, 117, 125, 0.3);
+        }
+        .save-btn:hover, .back-btn:hover {
+            transform: translateY(-2px);
+        }
+        .save-btn:hover {
+             box-shadow: 0 8px 25px 0 rgba(254, 161, 22, 0.4);
+        }
+         .back-btn:hover {
+            box-shadow: 0 8px 25px 0 rgba(108, 117, 125, 0.4);
+        }
+        .save-btn:active, .back-btn:active {
+            transform: translateY(0);
+        }
+        .success-message {
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; margin: 10px; max-width: 100%;}
+            .profile-sidebar { width: 100%; padding: 20px; border-right: none; border-bottom: 1px solid #e5e7eb;}
+            .main-content { padding: 20px; }
+            .form-row { flex-direction: column; gap: 0; }
+            .tab-buttons { flex-wrap: wrap; justify-content: center; margin-bottom: 20px;}
+            .header { flex-direction: column; gap: 15px;}
+            .page-title { text-align: center;}
+            .action-buttons {justify-content: center;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-sidebar">
+            <div class="profile-image-container">
+                <img src="https://via.placeholder.com/120" alt="Profile Picture" class="profile-image" id="profileImage" onclick="togglePhotoOptions()">
+                <div class="photo-edit-overlay" onclick="togglePhotoOptions(event)">
+                    ✏️
+                </div>
+                <div class="photo-options" id="photoOptions">
+                    <div class="photo-option" onclick="uploadPhoto()">
+                        📁 Upload Photo
+                    </div>
+                    <div class="photo-option" onclick="takePhoto()">
+                        📷 Take Photo
+                    </div>
+                    <div class="photo-option" onclick="removePhoto()">
+                        🗑️ Remove Photo
+                    </div>
+                </div>
+            </div>
+            <input type="file" class="photo-upload-input" id="photoUpload" accept="image/*" onchange="handlePhotoUpload(event)">
+            <h2 class="profile-name" id="displayName">User Name</h2>
+            <p class="profile-email" id="displayEmail">user@example.com</p>
+        </div>
+
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Profile Settings</h1>
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="switchTab(event, 'profile')">Edit Profile</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'experience')">Experience</button>
+                </div>
+            </div>
+
+            <div id="profileTab" class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstName">Name</label>
+                        <input type="text" class="form-input" placeholder="First name" id="firstName" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lastName">Surname</label>
+                        <input type="text" class="form-input" placeholder="Enter surname" id="lastName">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="phoneNumber">Phone Number</label>
+                        <input type="tel" class="form-input" placeholder="Enter phone number" id="phoneNumber">
+                    </div>
+                     <div class="form-group">
+                        <label class="form-label" for="emailId">Email ID</label>
+                        <input type="email" class="form-input" placeholder="Enter email id" id="emailId" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="address">Address</label>
+                        <input type="text" class="form-input" placeholder="Enter address" id="address">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="education">Education</label>
+                        <input type="text" class="form-input" placeholder="Enter education" id="education">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="country">Country</label>
+                        <input type="text" class="form-input" placeholder="Enter country" id="country">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="state">State/Region</label>
+                        <input type="text" class="form-input" placeholder="Enter state/region" id="state">
+                    </div>
+                </div>
+            </div>
+
+            <div id="experienceTab" class="experience-section">
+                <div class="form-group">
+                    <label class="form-label" for="designExperience">Experience in Designing</label>
+                    <textarea class="experience-textarea" placeholder="Describe your design experience" id="designExperience"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="additionalDetails">Additional Details</label>
+                    <textarea class="experience-textarea" placeholder="Any other relevant details" id="additionalDetails"></textarea>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="back-btn" onclick="goBack()">Back</button>
+                <button class="save-btn" onclick="saveProfile()">Save Profile</button>
+            </div>
+            <div class="success-message" id="successMessage">
+                Profile saved successfully!
+            </div>
+        </div>
+    </div>
+
+<script>
+    const CURRENT_USER_LS_KEY = 'currentUser'; // Key for logged-in user session object
+    const ALL_USERS_LS_KEY = 'users'; // Key for the array of all registered users
+    const PROFILE_DATA_LS_KEY_PREFIX = 'userProfileData_'; // Prefix for user-specific extended profile data
+
+    const defaultProfileImage = 'https://via.placeholder.com/120/CCCCCC/808080?Text=No+Image';
+
+    // --- Authentication and User Management ---
+    function getCurrentUser() {
+        return JSON.parse(localStorage.getItem(CURRENT_USER_LS_KEY));
+    }
+
+    function checkAuth() {
+        if (!getCurrentUser()) {
+            alert("You are not logged in. Redirecting to login page.");
+            // Redirect to index.html and try to show login modal
+            window.location.href = 'index.html?showLogin=true';
+            return false;
+        }
+        return true;
+    }
+
+    // --- Profile Data Management ---
+    function getUserProfileData(email) {
+        const savedData = localStorage.getItem(PROFILE_DATA_LS_KEY_PREFIX + email);
+        return savedData ? JSON.parse(savedData) : {
+            lastName: '',
+            address: '',
+            education: '',
+            country: '',
+            state: '',
+            designExperience: '',
+            additionalDetails: '',
+            profileImage: defaultProfileImage
+            // Note: firstName, email, phoneNumber come from currentUser initially
+        };
+    }
+
+    function saveUserProfileData(email, data) {
+        localStorage.setItem(PROFILE_DATA_LS_KEY_PREFIX + email, JSON.stringify(data));
+    }
+
+    // --- UI Population and Sidebar Update ---
+    function populateFormFields() {
+        const currentUser = getCurrentUser();
+        if (!currentUser) return; // Should be caught by checkAuth
+
+        const userProfile = getUserProfileData(currentUser.email);
+
+        // Populate read-only fields from currentUser
+        document.getElementById('firstName').value = currentUser.name || '';
+        document.getElementById('emailId').value = currentUser.email || '';
+        document.getElementById('phoneNumber').value = currentUser.phone || ''; // Pre-fill phone
+
+        // Populate editable fields from userProfile
+        document.getElementById('lastName').value = userProfile.lastName || '';
+        document.getElementById('address').value = userProfile.address || '';
+        document.getElementById('education').value = userProfile.education || '';
+        document.getElementById('country').value = userProfile.country || '';
+        document.getElementById('state').value = userProfile.state || '';
+        document.getElementById('designExperience').value = userProfile.designExperience || '';
+        document.getElementById('additionalDetails').value = userProfile.additionalDetails || '';
+        document.getElementById('profileImage').src = userProfile.profileImage || defaultProfileImage;
+
+        updateSidebarDisplay(currentUser, userProfile.lastName);
+    }
+
+    function updateSidebarDisplay(currentUser, lastName) {
+        const currentUserName = currentUser ? currentUser.name : 'User';
+        const userLastName = lastName || '';
+        document.getElementById('displayName').textContent = `${currentUserName} ${userLastName}`.trim() || 'User Name';
+        document.getElementById('displayEmail').textContent = currentUser ? currentUser.email : 'user@example.com';
+    }
+
+
+    // --- Event Handlers and Actions ---
+    function saveProfile() {
+        const currentUser = getCurrentUser();
+        if (!currentUser) {
+            alert("Error: No current user session found.");
+            return;
+        }
+
+        const userProfile = getUserProfileData(currentUser.email); // Get existing or default profile
+
+        // Update profile data with form values
+        userProfile.lastName = document.getElementById('lastName').value.trim();
+        userProfile.address = document.getElementById('address').value.trim();
+        userProfile.education = document.getElementById('education').value.trim();
+        userProfile.country = document.getElementById('country').value.trim();
+        userProfile.state = document.getElementById('state').value.trim();
+        userProfile.designExperience = document.getElementById('designExperience').value.trim();
+        userProfile.additionalDetails = document.getElementById('additionalDetails').value.trim();
+        // profileImage is handled by its own functions
+
+        // Get the new phone number from the form
+        const newPhoneNumber = document.getElementById('phoneNumber').value.trim();
+
+        // 1. Update phone number in the main 'users' array (ALL_USERS_LS_KEY)
+        let allUsers = JSON.parse(localStorage.getItem(ALL_USERS_LS_KEY)) || [];
+        const userIndexInAllUsers = allUsers.findIndex(u => u.email === currentUser.email);
+        if (userIndexInAllUsers !== -1) {
+            allUsers[userIndexInAllUsers].phone = newPhoneNumber;
+            localStorage.setItem(ALL_USERS_LS_KEY, JSON.stringify(allUsers));
+        } else {
+            console.warn("User not found in global users list for phone update.");
+        }
+
+        // 2. Update phone number in the 'currentUser' session object
+        currentUser.phone = newPhoneNumber;
+        localStorage.setItem(CURRENT_USER_LS_KEY, JSON.stringify(currentUser));
+
+        // 3. Save the extended user profile data (which now implicitly uses the updated phone via currentUser)
+        saveUserProfileData(currentUser.email, userProfile);
+
+        // Update sidebar and show success
+        updateSidebarDisplay(currentUser, userProfile.lastName);
+        
+        const successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'block';
+        const saveBtn = document.querySelector('.save-btn');
+        saveBtn.style.transform = 'scale(0.95)';
+        setTimeout(() => { saveBtn.style.transform = 'scale(1)'; }, 150);
+        setTimeout(() => { successMessage.style.display = 'none'; }, 3000);
+
+        console.log('Profile saved for:', currentUser.email, userProfile);
+    }
+
+    function goBack() {
+        window.history.back();
+    }
+
+    // --- Photo Editing Functionality ---
+    function togglePhotoOptions(event) {
+        if (event) event.stopPropagation();
+        const photoOptions = document.getElementById('photoOptions');
+        photoOptions.style.display = photoOptions.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function uploadPhoto() {
+        document.getElementById('photoUpload').click();
+        togglePhotoOptions();
+    }
+
+    function handlePhotoUpload(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const currentUser = getCurrentUser();
+                if (!currentUser) return;
+                const userProfile = getUserProfileData(currentUser.email);
+                userProfile.profileImage = e.target.result;
+                saveUserProfileData(currentUser.email, userProfile);
+                document.getElementById('profileImage').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function takePhoto() {
+        alert('Camera functionality would open here. For demo purposes, upload a photo.');
+        uploadPhoto(); // Fallback to upload
+    }
+
+    function removePhoto() {
+        const currentUser = getCurrentUser();
+        if (!currentUser) return;
+        const userProfile = getUserProfileData(currentUser.email);
+        userProfile.profileImage = defaultProfileImage;
+        saveUserProfileData(currentUser.email, userProfile);
+        document.getElementById('profileImage').src = defaultProfileImage;
+        togglePhotoOptions();
+    }
+
+    // Close photo options when clicking outside
+    document.addEventListener('click', function(event) {
+        const photoOptions = document.getElementById('photoOptions');
+        const profileImageContainer = document.querySelector('.profile-image-container');
+        if (photoOptions && profileImageContainer && !profileImageContainer.contains(event.target)) {
+            photoOptions.style.display = 'none';
+        }
+    });
+
+    // --- Tab Switching Functionality ---
+    function switchTab(event, tabName) {
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const profileTab = document.getElementById('profileTab');
+        const experienceTab = document.getElementById('experienceTab');
+
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        event.currentTarget.classList.add('active');
+        
+        if (tabName === 'profile') {
+            profileTab.style.display = 'block';
+            experienceTab.classList.remove('active');
+            experienceTab.style.display = 'none';
+        } else if (tabName === 'experience') {
+            profileTab.style.display = 'none';
+            experienceTab.classList.add('active');
+            experienceTab.style.display = 'block';
+        }
+    }
+
+    // --- Initialization ---
+    window.addEventListener('DOMContentLoaded', function() {
+        if (checkAuth()) {
+            populateFormFields();
+            // Initialize tab view
+            document.getElementById('profileTab').style.display = 'block';
+            document.getElementById('experienceTab').style.display = 'none';
+
+
+            // Real-time updates to sidebar for surname
+            document.getElementById('lastName').addEventListener('input', function() {
+                const currentUser = getCurrentUser();
+                if (currentUser) {
+                    updateSidebarDisplay(currentUser, this.value);
+                }
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>StayFinder - Your Perfect Getaway</title> <!-- Changed Title -->
+    <link rel="icon" type="img/png" href="./img/RS.png">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="hotel booking, stayfinder, hotels, vacation, travel" name="keywords">
+    <meta content="Find and book your perfect hotel with StayFinder. Best prices, wide selection, and easy booking." name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0071c2; /* Blue */
+            --secondary-color: #ff8c00; /* Orange */
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+            --success-color: #28a745;
+            --primary-font: 'Nunito', sans-serif;
+            --secondary-font: 'Heebo', sans-serif;
+            --title-font: 'Pacifico', cursive;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-color);
+            font-family: var(--primary-font); /* Changed to Nunito */
+        }
+        
+        /* Removed custom header, using template's navbar */
+        
+        .container { /* This is custom container, template uses container-fluid, container-xxl */
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(15, 23, 43, .7), rgba(15, 23, 43, .7)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 450px; /* Slightly taller */
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem; /* Space before search or other content */
+        }
+        
+        .hero-content {
+            width: 100%;
+        }
+        
+        .hero h1 {
+            font-size: 3rem; /* Larger H1 */
+            margin-bottom: 1rem;
+            font-family: var(--title-font);
+            color: #ddd;
+        }
+        
+        .hero p {
+            font-size: 1.3rem; /* Larger p */
+            margin-bottom: 2rem;
+            font-family: var(--secondary-font);
+        }
+        
+        .search-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: -70px; /* Increased negative margin for more overlap */
+            position: relative;
+            z-index: 10;
+        }
+        
+        .search-form .form-row {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-form .form-group {
+            flex: 1;
+            min-width: 180px; /* Adjusted min-width */
+        }
+        
+        .search-form .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .search-form .form-group input, 
+        .search-form .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: var(--secondary-font);
+        }
+        
+        .search-btn {
+            background-color: var(--secondary-color); /* Changed to secondary for main search */
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            align-self: flex-end;
+            height: auto;
+            margin-top: 1rem;
+        }
+        
+        .search-btn:hover {
+            background-color: #e07d00; /* Darker orange */
+        }
+
+        /* Featured Destinations & Popular Hotels Sections */
+        .featured-section {
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .featured-section h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--title-font);
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+        .destination-card, .popular-hotel-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .destination-card:hover, .popular-hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .destination-card img, .popular-hotel-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .destination-card-content, .popular-hotel-card-content {
+            padding: 1rem;
+        }
+        .destination-card h3, .popular-hotel-card h3 {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        .destination-card p, .popular-hotel-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+        }
+        .popular-hotel-card .price {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+         .popular-hotel-card .rating-stars { /* For Popular Hotels Section */
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        
+        .results-container {
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        #searchCriteria {
+            font-size: 0.9rem;
+            color: #555;
+            flex-basis: 100%; 
+            margin-bottom: 0.5rem; 
+            text-align: left;
+        }
+        
+        .results-header h2 {
+            font-size: 1.8rem; /* Slightly larger */
+            color: var(--primary-color);
+            font-family: var(--title-font);
+        }
+        
+        .sort-options select {
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: var(--secondary-font);
+        }
+        
+        .hotel-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .hotel-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hotel-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hotel-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .hotel-card:hover .hotel-image img {
+            transform: scale(1.05);
+        }
+        
+        .hotel-info {
+            padding: 1.5rem;
+        }
+        
+        .hotel-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .hotel-location {
+            color: #666;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .hotel-location i {
+            margin-right: 0.5rem;
+        }
+        
+        .hotel-rating {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .rating-stars {
+            color: var(--secondary-color);
+            margin-right: 0.5rem;
+        }
+        
+        .rating-value {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .hotel-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature {
+            background-color: var(--light-color);
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .hotel-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .price small {
+            font-size: 1rem;
+            color: #666;
+            font-weight: normal;
+        }
+        
+        .book-btn { /* This class is for the "View Details" button on hotel cards */
+            background-color: var(--primary-color); /* Changed to primary */
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem; /* Adjusted padding */
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .book-btn:hover {
+            background-color: #005999; /* Darker blue */
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Darker overlay */
+            z-index: 1000; /* Higher z-index */
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 0; /* Removed padding, handled by inner elements */
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px; /* Wider modal for details */
+            max-height: 90vh;
+            overflow: hidden; /* Manage overflow internally */
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem; /* Added padding */
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary-color);
+            font-family: var(--title-font);
+            font-size: 1.8rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem; /* Larger close icon */
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s;
+        }
+        .close-btn:hover {
+            color: var(--dark-color);
+        }
+
+        .modal-body {
+            padding: 0;
+            overflow-y: auto; /* Scroll only body if content exceeds */
+            flex-grow: 1;
+        }
+
+        /* Hotel Details Modal - Carousel */
+        .hotel-details-carousel {
+            position: relative;
+            height: 300px;
+            background-color: #eee;
+        }
+        .carousel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.4);
+            color: white;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .carousel-btn.prev { left: 10px; }
+        .carousel-btn.next { right: 10px; }
+
+        /* Hotel Details Modal - Tabs */
+        .modal-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            background-color: #f9f9f9;
+        }
+        .tab-link {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 600;
+            color: #555;
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 3px solid transparent;
+        }
+        .tab-link.active {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+        }
+        .tab-content {
+            display: none;
+            padding: 1.5rem;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .tab-content h3 {
+            color: var(--dark-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        .amenities-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .amenities-list li {
+            background-color: #e9ecef;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .amenities-list li i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        #map-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #777;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+
+        /* Room List inside Modal */
+        .room-list { /* For rooms inside the modal */
+             max-height: 400px; /* Or adjust as needed */
+             overflow-y: auto;
+        }
+        .room-card {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+        }
+        .room-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        .room-card h4 {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+        }
+        .book-room-btn {
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+        .book-room-btn:hover {
+             background-color: #e07d00;
+        }
+
+        /* Review Styles (Mock) */
+        .review {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        .review:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .review-author {
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+        .review-date {
+            font-size: 0.8rem;
+            color: #777;
+            margin-left: 0.5rem;
+        }
+        .review-rating .fa-star {
+            color: var(--secondary-color);
+        }
+        
+        .booking-form .form-group,
+        .payment-details .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .booking-form .form-group label,
+        .payment-details .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .booking-form .form-group input, 
+        .booking-form .form-group select,
+        .payment-details .form-group input, 
+        .payment-details .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: var(--secondary-font);
+        }
+        
+        .booking-form .form-row,
+        .payment-details .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .booking-form .form-row .form-group,
+        .payment-details .form-row .form-group {
+            flex: 1;
+        }
+        
+        .submit-btn { /* General submit button, for booking form */
+            background-color: var(--secondary-color); /* Using orange for main actions */
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        .submit-btn:hover:not(:disabled) {
+            background-color: #e07d00;
+        }
+        
+        .confirmation { 
+            text-align: center;
+            padding: 2rem;
+            display: none;
+        }
+        
+        .confirmation i {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+        
+        .confirmation h2 {
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+        
+        footer { /* Custom footer from original, if needed, else template footer will be used */
+            background-color: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright { /* For custom footer */
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+        }
+        
+        .hotel-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .hotel-description {
+            margin-bottom: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .booking-form-container, .payment-container, .confirmation-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+            display: none;
+        }
+        
+        .booking-form-container h2, .payment-container h2, .confirmation-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-family: var(--title-font);
+        }
+        
+        .payment-methods {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for more methods */
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .payment-method {
+            flex: 1;
+            min-width: 180px; /* Ensure methods don't get too squeezed */
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .payment-method.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(0, 113, 194, 0.05);
+            box-shadow: 0 0 10px rgba(0, 113, 194, 0.2);
+        }
+        
+        .payment-method img {
+            width: 50px;
+            height: auto;
+            margin-bottom: 0.5rem;
+        }
+        
+        .payment-details {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        .confirmation-icon {
+            font-size: 4rem;
+            color: var(--success-color);
+            margin-bottom: 1rem;
+        }
+        
+        .confirmation-details {
+            margin: 2rem auto;
+            max-width: 500px;
+            text-align: left;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            flex: 1;
+            font-weight: 600;
+        }
+        
+        .detail-value {
+            flex: 2;
+        }
+        
+        .back-to-search, #confirmPayment, #downloadConfirmationBtn { /* General button style for these actions */
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        #confirmPayment {
+             background-color: var(--success-color); /* Green for confirm */
+        }
+        #downloadConfirmationBtn {
+            background-color: var(--primary-color); /* Blue for download */
+            margin-left: 10px;
+        }
+        
+        .back-to-search:hover, #downloadConfirmationBtn:hover {
+            background-color: #005999;
+        }
+         #confirmPayment:hover:not(:disabled) {
+             background-color: #218838;
+        }
+        
+        @media (max-width: 768px) {
+            .hero { height: auto; padding: 3rem 0; } /* Adjust hero for smaller screens */
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .search-container { margin-top: 1rem; } /* No negative margin on small screens */
+
+            .search-form .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .search-form .form-row .form-group {
+                margin-bottom: 1rem;
+            }
+            .search-btn {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            #searchCriteria {
+                text-align: left;
+                margin-bottom: 1rem;
+            }
+            .sort-options {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            .sort-options select {
+                width: 100%;
+            }
+            
+            .booking-form .form-row,
+            .payment-details .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .booking-form .form-row .form-group,
+            .payment-details .form-row .form-group {
+                margin-bottom: 1rem;
+            }
+            
+            .hotel-list, .grid-container { /* For featured sections too */
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content { max-width: 95%; }
+            .modal-tabs { flex-direction: column; } /* Stack tabs on small screens */
+            .tab-link { border-bottom: 1px solid #eee; }
+            .tab-link.active { border-bottom: 3px solid var(--primary-color); }
+
+            .confirmation-container .submit-btn, .confirmation-container .back-to-search { /* Stack buttons on small screens */
+                display: block;
+                width: 100%;
+                margin-left: 0;
+            }
+            #downloadConfirmationBtn { margin-left: 0; }
+
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4 px-lg-5 py-3 py-lg-0">
+                <a href="index.html" class="navbar-brand p-0">
+                    <!-- Changed Icon and Text -->
+                    <h1 class="text-primary m-0"><i class="fa fa-hotel me-3"></i>StayFinder</h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0 pe-4">
+                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="menu.html" class="nav-item nav-link ">Menu</a>
+                        <a href="booking.html" class="nav-item nav-link active" >booking</a>
+                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="dashboard.html" class="nav-item nav-link">Dashboard</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar & Hero End -->
+
+    <section class="hero">
+        <div class="container hero-content">
+            <h1>Find Your Perfect Hotel</h1>
+            <p>Discover the best hotels at the best prices, tailored for you.</p>
+        </div>
+    </section>
+    
+<div class="container"> <!-- Main content container -->
+        <!-- Search Section -->
+        <div class="search-container">
+            <h2>Your Journey Starts Here</h2>
+            <form id="searchForm" class="search-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <select id="destination" required>
+                            <option value="">Select Destination</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="delhi">Delhi</option>
+                            <option value="bangalore">Bangalore</option>
+                            <option value="goa">Goa</option>
+                            <option value="jaipur">Jaipur</option>
+                            <option value="chennai">Chennai</option>
+                            <option value="kolkata">Kolkata</option>
+                            <option value="hyderabad">Hyderabad</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkIn">Check-in Date</label>
+                        <input type="date" id="checkIn" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkOut">Check-out Date</label>
+                        <input type="date" id="checkOut" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="guests">Guests</label>
+                        <select id="guests" required>
+                            <option value="1">1 Adult</option>
+                            <option value="2" selected>2 Adults</option>
+                            <option value="3">3 Adults</option>
+                            <option value="4">4 Adults</option>
+                            <option value="5">5 Adults</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="roomType">Room Type</label>
+                        <select id="roomType">
+                            <option value="all">All Room Types</option>
+                            <option value="standard">Standard Room</option>
+                            <option value="deluxe">Deluxe Room</option>
+                            <option value="suite">Suite</option>
+                            <option value="executive">Executive Room</option>
+                            <option value="villa">Villa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="priceRange">Price Range (per night)</label>
+                        <select id="priceRange">
+                            <option value="all">All Prices</option>
+                            <option value="0-5000">₹0 - ₹5000</option>
+                            <option value="5000-10000">₹5000 - ₹10000</option>
+                            <option value="10000-20000">₹10000 - ₹20000</option>
+                            <option value="20000-35000">₹20000 - ₹35000</option>
+                            <option value="35000+">₹35000+</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="search-btn">Search Hotels</button>
+            </form>
+        </div>
+
+        <!-- Featured Destinations Section -->
+        <section id="destinations" class="featured-section">
+            <h2>Explore Top Destinations</h2>
+            <div class="grid-container" id="featuredDestinationsList">
+                <!-- Destinations will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Popular Hotels Section -->
+        <section id="popular-hotels" class="featured-section">
+            <h2>Popular Hotels & Offers</h2>
+            <div class="grid-container" id="popularHotelsList">
+                <!-- Popular hotels will be populated by JavaScript -->
+            </div>
+        </section>
+        
+        <!-- Results Section -->
+        <div id="resultsContainer" class="results-container">
+            <div class="results-header">
+                <h2>Available Hotels</h2>
+                <div class="sort-options">
+                    <select id="sortBy">
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="rating-desc">Rating: High to Low</option>
+                        <option value="name-asc">Name: A to Z</option>
+                    </select>
+                </div>
+                <div id="searchCriteria"></div>
+            </div>
+            <div id="hotelList" class="hotel-list">
+                <!-- Hotels will be populated here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- Booking Form Section -->
+        <div id="bookingFormContainer" class="booking-form-container">
+            <form id="bookingForm" class="booking-form">
+                <h2>Guest Information</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="specialRequests">Special Requests</label>
+                    <textarea id="specialRequests" rows="3" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                </div>
+                
+                <div id="selectedRoomInfo" style="margin: 1.5rem 0; padding: 1rem; background-color: #f8f9fa; border-radius: 8px;">
+                    <!-- Selected room info will be displayed here -->
+                </div>
+                
+                <button type="submit" class="submit-btn">Continue to Payment</button>
+            </form>
+        </div>
+        
+        <!-- Payment Section -->
+        <div id="paymentContainer" class="payment-container">
+            <h2>Payment Information</h2>
+            <p>Please select your payment method</p>
+            
+            <div class="payment-methods">
+                <div class="payment-method" data-method="credit">
+                    <img src="https://cdn-icons-png.flaticon.com/512/196/196578.png" alt="Credit Card">
+                    <h3>Credit/Debit Card</h3>
+                    <p>Visa, Mastercard, RuPay, AmEx</p>
+                </div>
+                <div class="payment-method" data-method="paypal">
+                    <img src="https://cdn-icons-png.flaticon.com/512/174/174861.png" alt="PayPal">
+                    <h3>PayPal / UPI</h3>
+                    <p>Secure online payments</p>
+                </div>
+                 <div class="payment-method" data-method="netbanking">
+                    <img src="https://cdn-icons-png.flaticon.com/512/888/888874.png" alt="Net Banking" style="width: 45px;">
+                    <h3>Net Banking</h3>
+                    <p>Pay via your bank's portal</p>
+                </div>
+                <div class="payment-method" data-method="wallet">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2489/2489689.png" alt="Digital Wallet" style="width: 45px;">
+                    <h3>Digital Wallet</h3>
+                    <p>Google Pay, PhonePe, etc.</p>
+                </div>
+            </div>
+            
+            <div id="creditCardDetails" class="payment-details" style="display:none;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456">
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cardName">Name on Card</label>
+                        <input type="text" id="cardName">
+                    </div>
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry Date</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123">
+                    </div>
+                </div>
+            </div>
+            
+            <div id="paypalDetails" class="payment-details" style="display: none;">
+                <p>You will be redirected to PayPal or use UPI to complete your payment securely.</p>
+                 <div class="form-group">
+                    <label for="upiId">UPI ID (if paying via UPI)</label>
+                    <input type="text" id="upiId" placeholder="yourname@upi" style="margin-bottom: 10px;">
+                    <button type="button" id="requestUpiPaymentBtn" class="search-btn" style="background-color: var(--secondary-color); width:auto; padding: 0.6rem 1rem;">Request UPI Payment</button>
+                </div>
+                 <div id="upiMessage" style="margin-top: 10px; color: var(--primary-color);"></div>
+            </div>
+
+            <div id="netBankingDetails" class="payment-details" style="display:none;">
+                <div class="form-group">
+                    <label for="bankSelect">Select Your Bank</label>
+                    <select id="bankSelect" style="width:100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 4px; font-size: 1rem;">
+                        <option value="">-- Select Bank --</option>
+                        <option value="sbi">State Bank of India</option>
+                        <option value="hdfc">HDFC Bank</option>
+                        <option value="icici">ICICI Bank</option>
+                        <option value="axis">Axis Bank</option>
+                        <option value="pnb">Punjab National Bank</option>
+                        <option value="kotak">Kotak Mahindra Bank</option>
+                        <option value="other">Other Bank</option>
+                    </select>
+                </div>
+                <p style="margin-top:10px; font-size:0.9rem; color: #555;">You will be redirected to your bank's secure payment page (simulation).</p>
+            </div>
+
+            <div id="walletDetails" class="payment-details" style="display:none;">
+                <p style="font-size:0.9rem; color: #555;">You may be prompted to complete payment via your selected wallet app (e.g., Google Pay, PhonePe) or by scanning a QR code.</p>
+                <div class="form-group">
+                    <label for="walletId">Wallet ID / Phone Number (Optional)</label>
+                    <input type="text" id="walletId" placeholder="Enter if applicable">
+                </div>
+                <button type="button" id="requestWalletPaymentBtn" class="search-btn" style="background-color: var(--secondary-color); width:auto; padding: 0.6rem 1rem; margin-top:0.5rem;">Proceed with Wallet</button>
+                <div id="walletMessage" style="margin-top: 10px; color: var(--primary-color);"></div>
+            </div>
+            
+            <div id="bookingSummary" style="margin: 1.5rem 0; padding: 1rem; background-color: #f8f9fa; border-radius: 8px;">
+                <!-- Booking summary will be displayed here -->
+            </div>
+            
+            <button id="confirmPayment" class="submit-btn" disabled>Confirm Booking</button>
+        </div>
+        
+        <!-- Confirmation Section -->
+        <div id="confirmationContainer" class="confirmation-container">
+            <div class="confirmation-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Booking Confirmed!</h2>
+            <p>Thank you for your booking. Your reservation has been confirmed.</p>
+            
+            <div class="confirmation-details">
+                <div class="detail-row">
+                    <div class="detail-label">Booking Reference:</div>
+                    <div id="confirmationRef" class="detail-value">GH12345678</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Guest Name:</div>
+                    <div id="confirmationName" class="detail-value">John Doe</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Hotel:</div>
+                    <div id="confirmationHotel" class="detail-value">Grand Horizon Hotel</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Room:</div>
+                    <div id="confirmationRoom" class="detail-value">Deluxe Room</div> <!-- Will be updated -->
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Dates:</div>
+                    <div id="confirmationDates" class="detail-value">15 Oct 2023 - 18 Oct 2023</div>
+                </div>
+                <div class="detail-row">
+                    <div class="detail-label">Total Amount:</div>
+                    <div id="confirmationAmount" class="detail-value">₹33750.00</div>
+                </div>
+            </div>
+            
+            <p>A confirmation email has been sent to your registered email address.</p>
+            <button id="backToSearch" class="back-to-search">Make Another Booking</button>
+            <button id="downloadConfirmationBtn" class="submit-btn" style="background-color: var(--primary-color); margin-left: 10px;">Download Confirmation (PDF)</button>
+        </div>
+    </div> <!-- End Main content .container -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+             <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <a href="index.html" class="breadcrumb-item">Home</a>
+                            <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Contact</li>
+                        </ol>
+                    </nav>
+            <div class="container py-5">
+                <div class="row g-5">
+                     <!-- Removed Breadcrumbs from footer for cleaner look -->
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Company</h4>
+                        <a class="btn btn-link" href="">About Us</a>
+                        <a class="btn btn-link" href="">Contact Us</a>
+                        <a class="btn btn-link" href="">Reservation</a>
+                        <a class="btn btn-link" href="">Privacy Policy</a>
+                        <a class="btn btn-link" href="">Terms & Condition</a>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Contact</h4>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Bengaluru,Eletronics city</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 8660303636</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>contact@stayfinder.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Opening</h4>
+                        <h5 class="text-light fw-normal">Monday - Saturday</h5>
+                        <p>09AM - 09PM</p>
+                        <h5 class="text-light fw-normal">Sunday</h5>
+                        <p>10AM - 08PM</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h4 class="section-title ff-secondary text-start text-primary fw-normal mb-4">Newsletter</h4>
+                        <p>Subscribe to our newsletter for exclusive deals and updates.</p>
+                        <div class="position-relative mx-auto" style="max-width: 400px;">
+                            <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="text" placeholder="Your email">
+                            <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                            © <a class="border-bottom" href="#">StayFinder</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-md-6 text-center text-md-end">
+                            <div class="footer-menu">
+                                <a href="">Home</a>
+                                <a href="">Cookies</a>
+                                <a href="">Help</a>
+                                <a href="">FQAs</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+    <script>
+        let currentlyDisplayedHotels = []; 
+
+        const hotelsData = { 
+            "mumbai": [
+                {
+                    id: 1, name: "The Taj Mahal Palace", location: "Mumbai, India", rating: 4.9, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+                    ],
+                    generalAmenities: ["Free WiFi", "Swimming Pool", "Gym", "Spa", "Valet Parking", "Multiple Restaurants", "Sea View"],
+                    description: "An iconic luxury hotel offering breathtaking views of the Arabian Sea and Gateway of India. Experience unparalleled hospitality and timeless elegance in the heart of Mumbai.",
+                    rooms: [
+                        { id: 101, type: "Luxury Room", price: 350, image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegant room with a king bed and city or sea views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Butler Service", "Restaurant Access"], maxGuests: 2, available: 10 },
+                        { id: 102, type: "Taj Club Room", price: 480, image: "https://images.unsplash.com/photo-1611892440504-4cb0296a1a19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious room with exclusive club lounge access and personalized services.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Work Desk", "Lounge Access", "Pool Access"], maxGuests: 2, available: 5 },
+                        { id: 103, type: "Executive Suite", price: 700, image: "https://images.unsplash.com/photo-1582719471380-c1e34f5c9e35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Luxurious suite with a separate living area and panoramic views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Jacuzzi", "Living Room", "Spa Access"], maxGuests: 3, available: 3 }
+                    ]
+                },
+                {
+                    id: 2, name: "The Oberoi Mumbai", location: "Mumbai, India", rating: 4.8, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80"
+                    ],
+                    generalAmenities: ["Ocean Views", "24-hour Butler Service", "Outdoor Pool", "Fitness Centre", "Fine Dining", "Business Centre"],
+                    description: "A contemporary luxury hotel known for its impeccable service and stunning sea views from Nariman Point. The Oberoi offers a tranquil escape with world-class amenities.",
+                    rooms: [
+                        { id: 201, type: "Deluxe Room", price: 300, image: "https://images.unsplash.com/photo-1560200353-ce0a76b1d438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Well-appointed room with modern amenities and ocean views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Coffee Maker", "Ocean View", "Gym Access"], maxGuests: 2, available: 8 },
+                        { id: 202, type: "Premier Suite", price: 550, image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegant suite offering spacious comfort and enhanced amenities.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Work Desk", "Separate Living Area", "Restaurant Access"], maxGuests: 3, available: 4 }
+                    ]
+                },
+                 {
+                    id: 3, name: "Trident Nariman Point", location: "Mumbai, India", rating: 4.7, priceRange: "$$$",
+                    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: ["https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80", "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1566669437685-2c5a585fab55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"],
+                    generalAmenities: ["Sea View Rooms", "Outdoor Pool", "Fitness Centre", "Multiple Restaurants", "Bar"],
+                    description: "Overlooking the Arabian Sea, this hotel offers a perfect blend of comfort and style, with attentive service and modern facilities.",
+                    rooms: [
+                        { id: 301, type: "Standard Room", price: 220, image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Comfortable room with essential amenities and city views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Tea/Coffee Maker", "Pool Access"], maxGuests: 2, available: 12 },
+                        { id: 302, type: "Deluxe Ocean View Room", price: 280, image: "https://images.unsplash.com/photo-1566669437685-2c5a585fab55?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Room offering stunning views of the Arabian Sea.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Sea View", "Restaurant Access"], maxGuests: 2, available: 7 }
+                    ]
+                }
+            ],
+            "delhi": [
+                 {
+                    id: 4, name: "The Imperial", location: "Delhi, India", rating: 4.9, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: ["https://images.unsplash.com/photo-1582719508461-905c673771fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80", "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"],
+                    generalAmenities: ["Heritage Property", "Outdoor Pool", "Spa & Wellness", "Art Gallery", "Multiple Restaurants", "Bar"],
+                    description: "A historic luxury hotel reflecting the city's colonial past with a rich collection of art and an award-winning spa.",
+                    rooms: [
+                        { id: 401, type: "Heritage Room", price: 320, image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegantly appointed room with colonial charm and modern comforts.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "High Ceilings", "Restaurant Access", "Pool Access"], maxGuests: 2, available: 7 },
+                        { id: 402, type: "Luxury Suite", price: 600, image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious suite with a separate living area, perfect for extended stays.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Work Desk", "Personal Valet", "Spa Access"], maxGuests: 3, available: 3 }
+                    ]
+                },
+                {
+                    id: 5, name: "Shangri-La Eros", location: "Delhi, India", rating: 4.7, priceRange: "$$$",
+                    image: "https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1549294413-26f195200c16?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Outdoor Pool", "Fitness Centre", "Spa", "Multiple Dining Options", "City Views"],
+                    description: "Experience luxury and comfort at Shangri-La Eros, offering panoramic views of the city and exceptional service.",
+                    rooms: [
+                        { id: 501, type: "Deluxe Room", price: 250, image: "https://images.unsplash.com/photo-1560200353-ce0a76b1d438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Modern deluxe room with city views and premium amenities.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Work Desk"], maxGuests: 2, available: 10 },
+                        { id: 502, type: "Executive Suite", price: 450, image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious executive suite with a separate living area and enhanced privileges.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Living Area", "Club Access"], maxGuests: 3, available: 5 }
+                    ]
+                }
+            ],
+            "bangalore": [
+                {
+                    id: 6, name: "The Leela Palace", location: "Bangalore, India", rating: 4.9, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1568495248636-6412b2cf42f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1568495248636-6412b2cf42f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+                        "https://images.unsplash.com/photo-1596701062351-8c2c1409fdd5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Palace Architecture", "Lush Gardens", "Outdoor Pool", "Spa", "Fine Dining", "Butler Service"],
+                    description: "An epitome of luxury, The Leela Palace Bangalore is set amidst acres of ornate gardens and cascading waterfalls.",
+                    rooms: [
+                        { id: 601, type: "Deluxe Room", price: 380, image: "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Luxuriously appointed room with elegant decor and modern amenities.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Garden View"], maxGuests: 2, available: 15 },
+                        { id: 602, type: "Royal Suite", price: 900, image: "https://images.unsplash.com/photo-1596701062351-8c2c1409fdd5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Opulent suite offering unparalleled luxury, a private balcony, and dedicated butler service.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Living Room", "Dining Area", "Private Balcony", "Butler Service"], maxGuests: 4, available: 2 }
+                    ]
+                },
+                {
+                    id: 7, name: "ITC Gardenia", location: "Bangalore, India", rating: 4.8, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1611892440504-4cb0296a1a19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Eco-Friendly", "Vertical Gardens", "Outdoor Pool", "Wellness Spa", "Multiple Award-Winning Restaurants"],
+                    description: "Inspired by a blooming garden, ITC Gardenia offers a unique blend of luxury, nature, and responsible hospitality.",
+                    rooms: [
+                        { id: 701, type: "Eva Room (Ladies Wing)", price: 320, image: "https://images.unsplash.com/photo-1611892440504-4cb0296a1a19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Specially designed room for solo lady travelers with enhanced security and amenities.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Lady Butler", "Special Amenities"], maxGuests: 1, available: 8 },
+                        { id: 702, type: "Gardenia Suite", price: 650, image: "https://images.unsplash.com/photo-1582719471380-c1e34f5c9e35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegant suite with garden views and access to exclusive lounges.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Living Area", "Garden View", "Lounge Access"], maxGuests: 3, available: 4 }
+                    ]
+                }
+            ],
+            "goa": [
+                {
+                    id: 8, name: "Taj Exotica Resort & Spa", location: "Goa, India", rating: 4.7, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1563911302283-d2bc129e757c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1563911302283-d2bc129e757c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1590001155093-a3c66ab0c39c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+                        "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Beachfront", "Private Beach Access", "Large Pool", "Jiva Spa", "Golf Course", "Water Sports"],
+                    description: "A Mediterranean-style resort set on 56 acres of lush greenery, offering direct access to Benaulim Beach.",
+                    rooms: [
+                        { id: 801, type: "Deluxe Sea View Room", price: 280, image: "https://images.unsplash.com/photo-1590001155093-a3c66ab0c39c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious room with a private balcony overlooking the Arabian Sea.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Balcony", "Sea View"], maxGuests: 2, available: 20 },
+                        { id: 802, type: "Luxury Villa", price: 550, image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Private villa with a plunge pool and garden, offering utmost privacy and luxury.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Private Plunge Pool", "Living Area", "Garden"], maxGuests: 4, available: 5 }
+                    ]
+                },
+                {
+                    id: 9, name: "W Goa", location: "Goa, India", rating: 4.6, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1586798475864-3a65064dd458?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1586798475864-3a65064dd458?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1600091942040-587FE5759711?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Chic Design", "Rock Pool", "Spa by Clarins", "Beach Access", "Vibrant Nightlife"],
+                    description: "Located on Vagator Beach, W Goa is known for its electrifying design, vibrant atmosphere, and stunning views.",
+                    rooms: [
+                        { id: 901, type: "Spectacular Room", price: 320, image: "https://images.unsplash.com/photo-1600091942040-587FE5759711?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Stylish room with bold decor and a private balcony.", amenities: ["Free WiFi", "TV", "Air Conditioning", "W Signature Bed", "Bliss Spa Amenities"], maxGuests: 2, available: 12 },
+                        { id: 902, type: "Marvelous Suite", price: 600, image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Expansive suite with a separate living room, large balcony, and ocean views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Room", "Ocean View Balcony", "Soaking Tub"], maxGuests: 3, available: 3 }
+                    ]
+                }
+            ],
+            "jaipur": [
+                {
+                    id: 10, name: "Rambagh Palace", location: "Jaipur, India", rating: 4.9, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1598087469191-8c1197281020?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1598087469191-8c1197281020?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1600010691046-f6a0aa07692a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+                        "https://images.unsplash.com/photo-1617357109528-9a1ac5933a94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Former Royal Palace", "Expansive Gardens", "Indoor & Outdoor Pools", "Jiva Grande Spa", "Vintage Car Rides"],
+                    description: "Once the residence of the Maharaja of Jaipur, Rambagh Palace offers an unparalleled experience of royal living.",
+                    rooms: [
+                        { id: 1001, type: "Palace Room", price: 450, image: "https://images.unsplash.com/photo-1600010691046-f6a0aa07692a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegantly restored room with period furniture and garden views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Butler Service", "Garden View"], maxGuests: 2, available: 10 },
+                        { id: 1002, type: "Historical Suite", price: 800, image: "https://images.unsplash.com/photo-1617357109528-9a1ac5933a94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Themed suite reflecting a bygone era, with original antiques and artwork.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Area", "Four-Poster Bed", "Personal Butler"], maxGuests: 3, available: 4 }
+                    ]
+                },
+                {
+                    id: 11, name: "ITC Rajputana", location: "Jaipur, India", rating: 4.7, priceRange: "$$$",
+                    image: "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80", 
+                    gallery: [
+                        "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Haveli Architecture", "Courtyard Pool", "Kaya Kalp Spa", "Rajasthani Cuisine", "Cultural Performances"],
+                    description: "Reflecting the spirit of Rajasthan's majestic forts, ITC Rajputana offers a luxurious stay with traditional hospitality.",
+                    rooms: [
+                        { id: 1101, type: "Executive Club Room", price: 220, image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Comfortable room with modern amenities and access to club lounge.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Club Lounge Access"], maxGuests: 2, available: 18 },
+                        { id: 1102, type: "Rajputana Suite", price: 400, image: "https://images.unsplash.com/photo-1582719471380-c1e34f5c9e35?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious suite with traditional Rajasthani decor and a separate living area.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Room", "Personalized Service", "Pool View"], maxGuests: 3, available: 6 }
+                    ]
+                }
+            ],
+            "chennai": [
+                {
+                    id: 12, name: "ITC Grand Chola", location: "Chennai, India", rating: 4.8, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+                    ],
+                    generalAmenities: ["Palatial Architecture", "Multiple Pools", "Kaya Kalp Spa", "10+ Dining Venues", "Eco-Responsible"],
+                    description: "A tribute to Southern India's Chola dynasty, this LEED Platinum certified hotel is one of the largest in India.",
+                    rooms: [
+                        { id: 1201, type: "Executive Club Room", price: 280, image: "https://images.unsplash.com/photo-1455587734955-081b22074882?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Well-appointed room with sophisticated decor and modern technology.", amenities: ["Free WiFi", "iPad Controls", "Air Conditioning", "Mini Bar", "Club Lounge Access"], maxGuests: 2, available: 25 },
+                        { id: 1202, type: "Chola Suite", price: 550, image: "https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Luxurious suite with a separate living area, kitchenette, and personalized butler service.", amenities: ["Free WiFi", "iPad Controls", "Living Room", "Kitchenette", "Butler Service", "Pool View"], maxGuests: 3, available: 8 }
+                    ]
+                },
+                {
+                    id: 13, name: "The Park Chennai", location: "Chennai, India", rating: 4.5, priceRange: "$$$",
+                    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1560200353-ce0a76b1d438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Contemporary Design", "Rooftop Pool", "Aura Spa", "Trendy Restaurants & Bar", "Central Location"],
+                    description: "A stylish boutique hotel known for its vibrant design, eclectic dining, and lively atmosphere in the heart of Chennai.",
+                    rooms: [
+                        { id: 1301, type: "Luxury Room", price: 180, image: "https://images.unsplash.com/photo-1560200353-ce0a76b1d438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Chic room with modern art, comfortable bedding, and city views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Designer Toiletries"], maxGuests: 2, available: 15 },
+                        { id: 1302, type: "Studio Suite", price: 320, image: "https://images.unsplash.com/photo-1611892440504-4cb0296a1a19?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious suite with a separate work/lounge area, ideal for business travelers.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Work Desk", "Living Area", "Espresso Machine"], maxGuests: 2, available: 7 }
+                    ]
+                }
+            ],
+            "kolkata": [
+                {
+                    id: 14, name: "The Oberoi Grand", location: "Kolkata, India", rating: 4.8, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Heritage Building", "Colonial Charm", "Central Courtyard Pool", "Spa", "Fine Thai Dining", "High Tea"],
+                    description: "Affectionately known as the 'Grande Dame of Chowringhee', this iconic hotel offers classic elegance and warm hospitality.",
+                    rooms: [
+                        { id: 1401, type: "Deluxe Room", price: 290, image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegantly furnished room with period details and modern comforts.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Teakwood Floors"], maxGuests: 2, available: 20 },
+                        { id: 1402, type: "Luxury Suite", price: 580, image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious suite with a separate living room, balcony overlooking the pool or city.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Room", "Balcony", "Butler Service"], maxGuests: 3, available: 6 }
+                    ]
+                },
+                {
+                    id: 15, name: "ITC Sonar, a Luxury Collection Resort & Spa", location: "Kolkata, India", rating: 4.7, priceRange: "$$$",
+                    image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Resort-style", "Water Gardens", "Outdoor Pools", "Kaya Kalp Spa", "Award-winning Bengali Cuisine"],
+                    description: "Set amidst lush greenery and water bodies, ITC Sonar offers a tranquil escape with a focus on local culture and cuisine.",
+                    rooms: [
+                        { id: 1501, type: "Sonar Room", price: 240, image: "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Comfortable room with views of the gardens or water features.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Garden/Water View"], maxGuests: 2, available: 15 },
+                        { id: 1502, type: "Executive Villa", price: 450, image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious villa with a private sit-out area and personalized services.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Area", "Private Sit-out", "Butler Service"], maxGuests: 4, available: 5 }
+                    ]
+                }
+            ],
+            "hyderabad": [
+                {
+                    id: 16, name: "Taj Falaknuma Palace", location: "Hyderabad, India", rating: 4.9, priceRange: "$$$$",
+                    image: "https://images.unsplash.com/photo-1598087469191-8c1197281020?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80", 
+                    gallery: [
+                        "https://images.unsplash.com/photo-1598087469191-8c1197281020?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1600010691046-f6a0aa07692a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+                        "https://images.unsplash.com/photo-1617357109528-9a1ac5933a94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Nizam's Palace", "Horse-drawn Carriage Arrival", "Jiva Spa", "Royal Gardens", "Library", "Billiards Room"],
+                    description: "Perched 2,000 feet above Hyderabad, this former palace of the Nizam offers a glimpse into royal Nizami life.",
+                    rooms: [
+                        { id: 1601, type: "Palace Room", price: 500, image: "https://images.unsplash.com/photo-1600010691046-f6a0aa07692a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Beautifully restored room with antique furniture, intricate decor, and city or garden views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Butler Service", "Period Furniture"], maxGuests: 2, available: 10 },
+                        { id: 1602, type: "Royal Suite", price: 1200, image: "https://images.unsplash.com/photo-1617357109528-9a1ac5933a94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Opulent suite that once hosted royalty, featuring rich tapestries, original artwork, and panoramic views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Room", "Dining Area", "Personal Butler", "Jacuzzi"], maxGuests: 3, available: 3 }
+                    ]
+                },
+                {
+                    id: 17, name: "Park Hyatt Hyderabad", location: "Hyderabad, India", rating: 4.7, priceRange: "$$$",
+                    image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                    gallery: [
+                        "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80",
+                        "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+                    ],
+                    generalAmenities: ["Modern Luxury", "Infinity Pool", "The Spa", "Multiple Restaurants", "Business Centre", "City Views"],
+                    description: "A sophisticated urban retreat offering contemporary luxury, exceptional dining, and personalized service in Banjara Hills.",
+                    rooms: [
+                        { id: 1701, type: "Standard King Room", price: 260, image: "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Spacious room with plush king bed, modern amenities, and floor-to-ceiling windows.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Mini Bar", "Work Desk", "Marble Bathroom"], maxGuests: 2, available: 18 },
+                        { id: 1702, type: "Park Suite", price: 520, image: "https://images.unsplash.com/photo-1596701062351-8c2c1409fdd5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60", description: "Elegant suite with a separate living area, luxurious bathroom, and panoramic city views.", amenities: ["Free WiFi", "TV", "Air Conditioning", "Living Room", "Dining Nook", "Deep Soaking Tub", "City Views"], maxGuests: 3, available: 7 }
+                    ]
+                }
+            ]
+        };
+
+        // SCALING PRICES TO INR and ensuring all hotels have necessary fields
+        const INR_CONVERSION_FACTOR = 75; 
+        for (const city in hotelsData) {
+            hotelsData[city].forEach(hotel => {
+                if (hotel.rooms && hotel.rooms.length > 0) {
+                    hotel.rooms.forEach(room => {
+                        room.price = Math.round(room.price * INR_CONVERSION_FACTOR);
+                    });
+                }
+                if (!hotel.gallery) hotel.gallery = [hotel.image]; 
+                if (!hotel.generalAmenities) hotel.generalAmenities = ["Free WiFi", "Restaurant", "Air Conditioning"];
+                if (!hotel.description) hotel.description = "A wonderful place to stay offering comfort and convenience.";
+                if (!hotel.rooms) hotel.rooms = []; 
+            });
+        }
+
+
+        // DOM Elements
+        const searchForm = document.getElementById('searchForm');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const hotelList = document.getElementById('hotelList');
+        const searchCriteria = document.getElementById('searchCriteria');
+        const bookingFormContainer = document.getElementById('bookingFormContainer');
+        const bookingForm = document.getElementById('bookingForm');
+        const paymentContainer = document.getElementById('paymentContainer');
+        const confirmationContainer = document.getElementById('confirmationContainer');
+        const backToSearchBtn = document.getElementById('backToSearch');
+        const confirmPaymentBtn = document.getElementById('confirmPayment');
+        const paymentMethods = document.querySelectorAll('.payment-method');
+        const creditCardDetails = document.getElementById('creditCardDetails');
+        const paypalDetails = document.getElementById('paypalDetails');
+        const netBankingDetails = document.getElementById('netBankingDetails'); 
+        const walletDetails = document.getElementById('walletDetails'); 
+        const selectedRoomInfo = document.getElementById('selectedRoomInfo');
+        const bookingSummary = document.getElementById('bookingSummary');
+        const sortBy = document.getElementById('sortBy');
+        const requestUpiPaymentBtn = document.getElementById('requestUpiPaymentBtn');
+        const upiMessage = document.getElementById('upiMessage');
+        const requestWalletPaymentBtn = document.getElementById('requestWalletPaymentBtn'); 
+        const walletMessage = document.getElementById('walletMessage'); 
+        const featuredDestinationsList = document.getElementById('featuredDestinationsList');
+        const popularHotelsList = document.getElementById('popularHotelsList');
+        const downloadConfirmationBtn = document.getElementById('downloadConfirmationBtn');
+
+
+        // Current booking data
+        let currentBooking = {
+            hotel: null,
+            room: null,
+            assignedRoomNumber: null, 
+            checkIn: null,
+            checkOut: null,
+            guests: 2,
+            guestInfo: null,
+            paymentMethod: null
+        };
+
+        // Populate Featured Destinations & Popular Hotels
+        function populateFeaturedDestinations() {
+            const destinations = [
+                { name: "Mumbai", image: "https://images.unsplash.com/photo-1562979314-1acef9fad10e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60", value: "mumbai" },
+                { name: "Delhi", image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60", value: "delhi" },
+                { name: "Goa", image: "https://images.unsplash.com/photo-1560179406-0f56e4f351de?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60", value: "goa" },
+                { name: "Bangalore", image: "https://images.unsplash.com/photo-1596176533580-9c0376d0dda9?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=60", value: "bangalore" }
+            ];
+            featuredDestinationsList.innerHTML = destinations.map(dest => `
+                <div class="destination-card" data-value="${dest.value}">
+                    <img src="${dest.image}" alt="${dest.name}">
+                    <div class="destination-card-content">
+                        <h3>${dest.name}</h3>
+                        <p>Explore the vibrant city of ${dest.name}.</p>
+                    </div>
+                </div>
+            `).join('');
+             featuredDestinationsList.querySelectorAll('.destination-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const destValue = this.dataset.value;
+                    document.getElementById('destination').value = destValue;
+                    searchForm.dispatchEvent(new Event('submit')); 
+                });
+            });
+        }
+
+        function populatePopularHotels() {
+            const popular = [
+                hotelsData.mumbai?.[0], 
+                hotelsData.delhi?.[0], 
+                hotelsData.bangalore?.[0],
+                hotelsData.goa?.[0]
+            ].filter(Boolean); 
+
+            popularHotelsList.innerHTML = popular.map(hotel => {
+                 const cheapestRoom = hotel.rooms.length > 0 ? hotel.rooms.reduce((prev, current) => (prev.price < current.price) ? prev : current) : null;
+                 const ratingStarsHTML = getStarRatingHTML(hotel.rating);
+                 return `
+                <div class="popular-hotel-card" data-id="${hotel.id}" data-city="${hotel.location.split(',')[0].toLowerCase().trim()}">
+                    <img src="${hotel.image}" alt="${hotel.name}">
+                    <div class="popular-hotel-card-content">
+                        <h3>${hotel.name}</h3>
+                        <p>${hotel.location}</p>
+                        <div class="rating-stars">${ratingStarsHTML} (${hotel.rating.toFixed(1)})</div>
+                        ${cheapestRoom ? `<p class="price">From ₹${cheapestRoom.price}/night</p>` : ''}
+                    </div>
+                </div>
+            `}).join('');
+
+            popularHotelsList.querySelectorAll('.popular-hotel-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const hotelId = parseInt(this.dataset.id);
+                    const cityKey = this.dataset.city; 
+                    
+                    const originalHotelData = JSON.parse(JSON.stringify(hotelsData[cityKey]?.find(h => h.id === hotelId)));
+                    if (originalHotelData) {
+                         showHotelDetailsModal(originalHotelData); 
+                    }
+                });
+            });
+        }
+
+
+        window.onload = function() {
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            
+            const checkOutMinDate = new Date(tomorrow); 
+            checkOutMinDate.setDate(tomorrow.getDate() + 1); 
+            
+            document.getElementById('checkIn').valueAsDate = tomorrow;
+            document.getElementById('checkIn').min = today.toISOString().split("T")[0];
+
+
+            const defaultCheckOut = new Date(tomorrow);
+            defaultCheckOut.setDate(tomorrow.getDate() + 2); 
+            document.getElementById('checkOut').valueAsDate = defaultCheckOut;
+            document.getElementById('checkOut').min = checkOutMinDate.toISOString().split("T")[0];
+
+            document.getElementById('checkIn').addEventListener('change', function() {
+                const checkInDate = new Date(this.value);
+                const nextDay = new Date(checkInDate);
+                nextDay.setDate(checkInDate.getDate() + 1);
+                document.getElementById('checkOut').min = nextDay.toISOString().split("T")[0];
+                if (new Date(document.getElementById('checkOut').value) <= checkInDate) {
+                    document.getElementById('checkOut').valueAsDate = nextDay;
+                }
+            });
+
+            populateFeaturedDestinations();
+            populatePopularHotels();
+        };
+
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const destination = document.getElementById('destination').value;
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            const guests = parseInt(document.getElementById('guests').value);
+            const roomType = document.getElementById('roomType').value;
+            const priceRangeInput = document.getElementById('priceRange').value;
+            
+            currentBooking.checkIn = checkIn;
+            currentBooking.checkOut = checkOut;
+            currentBooking.guests = guests;
+            
+            let baseHotels = hotelsData[destination] ? JSON.parse(JSON.stringify(hotelsData[destination])) : []; 
+            
+            let availableHotels = baseHotels.map(hotel => {
+                let availableRooms = hotel.rooms.filter(room => {
+                    if (roomType !== 'all' && !room.type.toLowerCase().includes(roomType.toLowerCase())) {
+                        return false;
+                    }
+                    
+                    if (priceRangeInput !== 'all') {
+                        const [minStr, maxStr] = priceRangeInput.split('-');
+                        const minPrice = parseInt(minStr);
+                        const maxPrice = maxStr && !priceRangeInput.endsWith('+') ? parseInt(maxStr) : Infinity; 
+                        if (priceRangeInput.endsWith('+')) { 
+                             if (room.price < minPrice) return false;
+                        } else {
+                             if (room.price < minPrice || room.price > maxPrice) return false;
+                        }
+                    }
+                    
+                    if (room.maxGuests < guests) return false;
+                    
+                    return true;
+                });
+                
+                return { ...hotel, rooms: availableRooms }; 
+            }).filter(hotel => hotel.rooms.length > 0); 
+            
+            sortHotels(availableHotels, sortBy.value);
+            
+            currentlyDisplayedHotels = availableHotels; 
+
+            const checkInDateObj = new Date(checkIn);
+            const checkOutDateObj = new Date(checkOut);
+            const nights = Math.ceil((checkOutDateObj - checkInDateObj) / (1000 * 60 * 60 * 24));
+            
+            searchCriteria.innerHTML = `
+                <p><b>${getDestinationName(destination)}</b> | ${formatDate(checkIn)} - ${formatDate(checkOut)} (${nights} ${nights > 1 ? 'nights' : 'night'}) | ${guests} ${guests > 1 ? 'Guests' : 'Guest'}</p>
+            `;
+            
+            displayHotels(currentlyDisplayedHotels); 
+            
+            resultsContainer.style.display = 'block';
+            bookingFormContainer.style.display = 'none';
+            paymentContainer.style.display = 'none';
+            confirmationContainer.style.display = 'none';
+            
+            resultsContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function sortHotels(hotels, sortOption) {
+            hotels.sort((a, b) => {
+                const minPriceA = a.rooms.length > 0 ? Math.min(...a.rooms.map(room => room.price)) : Infinity;
+                const minPriceB = b.rooms.length > 0 ? Math.min(...b.rooms.map(room => room.price)) : Infinity;
+
+                switch(sortOption) {
+                    case 'price-asc':
+                        return minPriceA - minPriceB;
+                    case 'price-desc':
+                        return minPriceB - minPriceA;
+                    case 'rating-desc':
+                        return b.rating - a.rating;
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    default:
+                        return 0;
+                }
+            });
+        }
+
+        sortBy.addEventListener('change', function() {
+            if (document.getElementById('destination').value) { 
+                 const destination = document.getElementById('destination').value;
+                const guests = parseInt(document.getElementById('guests').value);
+                const roomType = document.getElementById('roomType').value;
+                const priceRangeInput = document.getElementById('priceRange').value;
+
+                let baseHotelsToSort = hotelsData[destination] ? JSON.parse(JSON.stringify(hotelsData[destination])) : [];
+
+                let hotelsToSort = baseHotelsToSort.map(hotel => {
+                    let availableRooms = hotel.rooms.filter(room => {
+                        if (roomType !== 'all' && !room.type.toLowerCase().includes(roomType.toLowerCase())) {
+                            return false;
+                        }
+                        if (priceRangeInput !== 'all') {
+                            const [minStr, maxStr] = priceRangeInput.split('-');
+                            const minPrice = parseInt(minStr);
+                            const maxPrice = maxStr && !priceRangeInput.endsWith('+') ? parseInt(maxStr) : Infinity;
+                            if (priceRangeInput.endsWith('+')) { 
+                                if (room.price < minPrice) return false;
+                            } else {
+                                if (room.price < minPrice || room.price > maxPrice) return false;
+                            }
+                        }
+                        if (room.maxGuests < guests) return false;
+                        return true;
+                    });
+                    return { ...hotel, rooms: availableRooms };
+                }).filter(hotel => hotel.rooms.length > 0);
+
+                sortHotels(hotelsToSort, this.value);
+                currentlyDisplayedHotels = hotelsToSort; 
+                displayHotels(currentlyDisplayedHotels);
+            }
+        });
+
+        function getDestinationName(value) {
+            const destinations = {
+                "mumbai": "Mumbai", "delhi": "Delhi", "bangalore": "Bangalore",
+                "goa": "Goa", "jaipur": "Jaipur", "chennai": "Chennai",
+                "kolkata": "Kolkata", "hyderabad": "Hyderabad"
+            };
+            return destinations[value] || value;
+        }
+
+        function getStarRatingHTML(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating);
+            const halfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+            for (let i = 0; i < fullStars; i++) starsHTML += '<i class="fas fa-star"></i>';
+            if (halfStar) starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            for (let i = 0; i < emptyStars; i++) starsHTML += '<i class="far fa-star"></i>';
+            return starsHTML;
+        }
+
+        function displayHotels(hotelsToDisplay) { 
+            hotelList.innerHTML = '';
+            
+            if (hotelsToDisplay.length === 0) {
+                hotelList.innerHTML = '<p>No hotels available matching your criteria. Please try different dates or filters.</p>';
+                return;
+            }
+            
+            hotelsToDisplay.forEach(hotel => { 
+                const cheapestRoom = hotel.rooms.length > 0 ? hotel.rooms.reduce((prev, current) => (prev.price < current.price) ? prev : current) : {price: 'N/A'};
+                const mostExpensiveRoom = hotel.rooms.length > 0 ? hotel.rooms.reduce((prev, current) => (prev.price > current.price) ? prev : current) : {price: 'N/A'};
+                
+                const hotelElement = document.createElement('div');
+                hotelElement.className = 'hotel-card';
+                const cityKey = hotel.location.split(',')[0].toLowerCase().trim(); 
+                hotelElement.setAttribute('data-city', cityKey); 
+                hotelElement.setAttribute('data-id', hotel.id);
+                
+                let priceDisplay = `N/A`;
+                if (cheapestRoom.price !== 'N/A' && mostExpensiveRoom.price !== 'N/A' && cheapestRoom.price !== Infinity) {
+                    if (cheapestRoom.price === mostExpensiveRoom.price) {
+                         priceDisplay = `₹${cheapestRoom.price} <small>per night</small>`;
+                    } else {
+                         priceDisplay = `₹${cheapestRoom.price} <small>- ₹${mostExpensiveRoom.price} per night</small>`;
+                    }
+                } else if (cheapestRoom.price !== 'N/A' && cheapestRoom.price !== Infinity) {
+                     priceDisplay = `₹${cheapestRoom.price} <small>per night</small>`;
+                }
+
+                const ratingStarsHTML = getStarRatingHTML(hotel.rating);
+
+                hotelElement.innerHTML = `
+                    <div class="hotel-image">
+                        <img src="${hotel.image}" alt="${hotel.name}">
+                        ${hotel.priceRange === '$$$$' ? '<span class="hotel-badge">Luxury</span>' : hotel.priceRange === '$$$' ? '<span class="hotel-badge" style="background-color: var(--primary-color);">Premium</span>' : ''}
+                    </div>
+                    <div class="hotel-info">
+                        <h3 class="hotel-name">${hotel.name}</h3>
+                        <p class="hotel-location"><i class="fas fa-map-marker-alt"></i> ${hotel.location}</p>
+                        <div class="hotel-rating">
+                            <div class="rating-stars">${ratingStarsHTML}</div>
+                            <span class="rating-value">${hotel.rating.toFixed(1)}</span>
+                        </div>
+                        <p class="hotel-description">${hotel.description.substring(0,100)}...</p>
+                        <div class="hotel-features">
+                            ${hotel.generalAmenities.slice(0, 3).map(amenity => `<span class="feature"><i class="fas fa-check-circle" style="color: var(--success-color); margin-right: 3px;"></i> ${amenity}</span>`).join('')}
+                            ${hotel.rooms.length > 0 ? `<span class="feature">${hotel.rooms.length} Room Type${hotel.rooms.length > 1 ? 's' : ''} Matched</span>`: ''}
+                        </div>
+                        <div class="hotel-price">
+                            <div class="price">
+                                ${priceDisplay}
+                            </div>
+                            <button class="book-btn" data-id="${hotel.id}">View Details</button>
+                        </div>
+                    </div>
+                `;
+                
+                hotelList.appendChild(hotelElement);
+            });
+            
+            document.querySelectorAll('.book-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const hotelId = parseInt(this.closest('.hotel-card').getAttribute('data-id'));
+                    
+                    const hotelToShow = currentlyDisplayedHotels.find(h => h.id === hotelId);
+
+                    if (hotelToShow) {
+                        showHotelDetailsModal(JSON.parse(JSON.stringify(hotelToShow)));
+                    } else {
+                        console.error("Hotel data not found in displayed list for ID:", hotelId);
+                        const cityKeyFallback = this.closest('.hotel-card').getAttribute('data-city');
+                        const originalHotelData = hotelsData[cityKeyFallback]?.find(h => h.id === hotelId);
+                        if (originalHotelData) showHotelDetailsModal(JSON.parse(JSON.stringify(originalHotelData)));
+                    }
+                });
+            });
+        }
+
+        function showHotelDetailsModal(hotel) { 
+            const modal = document.createElement('div');
+            modal.className = 'modal';
+            let currentImageIndex = 0;
+
+            const amenityIconMap = {
+                "wifi": "fa-wifi", "pool": "fa-person-swimming", "gym": "fa-dumbbell",
+                "spa": "fa-spa", "parking": "fa-square-parking", "restaurant": "fa-utensils",
+                "bar": "fa-martini-glass", "sea view": "fa-water", "butler service": "fa-bell-concierge",
+                "air conditioning": "fa-snowflake", "tv": "fa-tv", "mini bar": "fa-wine-bottle",
+                "coffee maker": "fa-mug-saucer", "work desk": "fa-briefcase", "jacuzzi": "fa-hot-tub"
+            };
+
+            function getAmenityIcon(amenityName) {
+                const lowerAmenity = amenityName.toLowerCase();
+                for (const key in amenityIconMap) {
+                    if (lowerAmenity.includes(key)) {
+                        return amenityIconMap[key];
+                    }
+                }
+                return "fa-check-circle"; 
+            }
+            
+            const roomsForModalDisplay = hotel.rooms.filter(room => room.maxGuests >= currentBooking.guests);
+
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>${hotel.name}</h2>
+                        <button class="close-btn">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="hotel-details-carousel">
+                            <img src="${hotel.gallery[currentImageIndex]}" alt="${hotel.name}" class="carousel-image" id="carouselMainImage">
+                            ${hotel.gallery.length > 1 ? `
+                                <button class="carousel-btn prev" id="carouselPrevBtn"><i class="fas fa-chevron-left"></i></button>
+                                <button class="carousel-btn next" id="carouselNextBtn"><i class="fas fa-chevron-right"></i></button>
+                            ` : ''}
+                        </div>
+                        <div class="modal-tabs">
+                            <button class="tab-link active" data-tab="overview">Overview</button>
+                            <button class="tab-link" data-tab="rooms">Rooms & Rates</button>
+                            <button class="tab-link" data-tab="reviews">Reviews</button>
+                        </div>
+                        <div id="overview" class="tab-content active">
+                            <h3>About ${hotel.name}</h3>
+                            <p>${hotel.description}</p>
+                            <h4>Hotel Amenities</h4>
+                            <ul class="amenities-list">
+                                ${hotel.generalAmenities.map(amenity => `<li><i class="fas ${getAmenityIcon(amenity)}"></i> ${amenity}</li>`).join('')}
+                            </ul>
+                            <h4>Location</h4>
+                            <p>${hotel.location}</p>
+                            <div id="map-placeholder">Mock Map Area - Integration TBD</div>
+                        </div>
+                        <div id="rooms" class="tab-content">
+                            <h3>Available Rooms (Matching Your Search)</h3>
+                            <div class="room-list">
+                                ${roomsForModalDisplay.length > 0 ? roomsForModalDisplay.map(room => {
+                                    return `
+                                    <div class="room-card">
+                                        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                            <div style="flex: 1; min-width: 150px;">
+                                                <img src="${room.image}" alt="${room.type}">
+                                            </div>
+                                            <div style="flex: 2; min-width: 200px;">
+                                                <h4>${room.type} (ID: ${room.id})</h4>
+                                                <p style="font-size: 0.85rem; color: #555;">${room.description}</p>
+                                                <p style="font-size: 0.85rem;"><strong>Max Guests:</strong> ${room.maxGuests} | <strong>Available:</strong> ${room.available}</p>
+                                                <div style="margin: 0.3rem 0; font-size: 0.8rem;">
+                                                    ${room.amenities.map(amenity => `<span style="display: inline-block; background: #f0f0f0; color: #333; padding: 0.2rem 0.5rem; border-radius: 10px; margin-right: 0.3rem; margin-bottom: 0.3rem;"><i class="fas ${getAmenityIcon(amenity)}" style="font-size:0.7em;"></i> ${amenity}</span>`).join('')}
+                                                </div>
+                                            </div>
+                                            <div style="flex: 1; min-width: 120px; text-align: right;">
+                                                <div style="font-size: 1.1rem; font-weight: bold; color: var(--primary-color); margin-bottom: 0.5rem;">₹${room.price} <span style="font-size: 0.9rem; color: #666; font-weight: normal;">/night</span></div>
+                                                <button class="book-room-btn" data-room='${JSON.stringify(room).replace(/'/g, "\\'")}'>Book Now</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `}).join('') : '<p>No rooms matching your current search criteria (including guest count) are available in this hotel.</p>'}
+                            </div>
+                        </div>
+                        <div id="reviews" class="tab-content">
+                            <h3>Guest Reviews (${hotel.rating.toFixed(1)} / 5.0)</h3>
+                            <div class="review">
+                                <div class="review-author">Alice M. <span class="review-date">- Oct 20, 2023</span></div>
+                                <div class="review-rating">${getStarRatingHTML(5)}</div>
+                                <p>"Absolutely fantastic stay! The service was impeccable and the views were breathtaking. Highly recommend."</p>
+                            </div>
+                            <div class="review">
+                                <div class="review-author">Bob K. <span class="review-date">- Sep 15, 2023</span></div>
+                                <div class="review-rating">${getStarRatingHTML(4)}</div>
+                                <p>"Great location and comfortable rooms. Breakfast could have more options, but overall a very good experience."</p>
+                            </div>
+                             <p style="text-align:center; margin-top:1rem;"><small>Mock reviews for demonstration.</small></p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            modal.style.display = 'flex';
+            
+            if (hotel.gallery.length > 1) {
+                const carouselMainImage = modal.querySelector('#carouselMainImage');
+                modal.querySelector('#carouselPrevBtn').addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex - 1 + hotel.gallery.length) % hotel.gallery.length;
+                    carouselMainImage.src = hotel.gallery[currentImageIndex];
+                });
+                modal.querySelector('#carouselNextBtn').addEventListener('click', () => {
+                    currentImageIndex = (currentImageIndex + 1) % hotel.gallery.length;
+                    carouselMainImage.src = hotel.gallery[currentImageIndex];
+                });
+            }
+
+            const tabLinks = modal.querySelectorAll('.tab-link');
+            const tabContents = modal.querySelectorAll('.tab-content');
+            tabLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    link.classList.add('active');
+                    modal.querySelector(`#${link.dataset.tab}`).classList.add('active');
+                });
+            });
+            
+            modal.querySelector('.close-btn').addEventListener('click', () => modal.remove());
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) modal.remove();
+            });
+            
+            modal.querySelectorAll('.book-room-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const room = JSON.parse(button.getAttribute('data-room'));
+                    currentBooking.room = room;
+                    currentBooking.hotel = hotel; 
+                    
+                    bookingFormContainer.style.display = 'block';
+                    resultsContainer.style.display = 'none';
+                    
+                    const nights = Math.ceil(new Date(currentBooking.checkOut) - new Date(currentBooking.checkIn)) / (1000 * 60 * 60 * 24);
+                    const totalPrice = nights * room.price;
+
+                    selectedRoomInfo.innerHTML = `
+                        <h3>${hotel.name}</h3>
+                        <p><strong>Room Type:</strong> ${room.type} (ID: ${room.id})</p>
+                        <p><strong>Price:</strong> ₹${room.price} per night</p>
+                        <p><strong>Check-in:</strong> ${formatDate(currentBooking.checkIn)}</p>
+                        <p><strong>Check-out:</strong> ${formatDate(currentBooking.checkOut)} (${nights} ${nights > 1 ? 'nights' : 'night'})</p>
+                        <p><strong>Guests:</strong> ${currentBooking.guests}</p>
+                        <p><strong>Total for Stay: ₹${totalPrice.toFixed(2)}</strong></p>
+                    `;
+                    
+                    bookingFormContainer.scrollIntoView({ behavior: 'smooth' });
+                    modal.remove();
+                });
+            });
+        }
+
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            if (!firstName || !lastName || !email || !phone) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            if (!validateEmail(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+             if (!/^\d{10,}$/.test(phone.replace(/\s+/g, ''))) { 
+                alert('Please enter a valid phone number.');
+                return;
+            }
+            
+            currentBooking.guestInfo = {
+                firstName: firstName, lastName: lastName, email: email, phone: phone,
+                specialRequests: document.getElementById('specialRequests').value.trim()
+            };
+            
+            const nights = Math.ceil(new Date(currentBooking.checkOut) - new Date(currentBooking.checkIn)) / (1000 * 60 * 60 * 24);
+            const totalPrice = nights * currentBooking.room.price;
+            
+            paymentContainer.style.display = 'block';
+            bookingFormContainer.style.display = 'none';
+            
+            bookingSummary.innerHTML = `
+                <h3>Booking Summary</h3>
+                <p><strong>Hotel:</strong> ${currentBooking.hotel.name}</p>
+                <p><strong>Room Type:</strong> ${currentBooking.room.type} (ID: ${currentBooking.room.id})</p>
+                <p><strong>Check-in:</strong> ${formatDate(currentBooking.checkIn)}</p>
+                <p><strong>Check-out:</strong> ${formatDate(currentBooking.checkOut)} (${nights} ${nights > 1 ? 'nights' : 'night'})</p>
+                <p><strong>Guests:</strong> ${currentBooking.guests}</p>
+                <p><strong>Total Price: ₹${totalPrice.toFixed(2)}</strong></p>
+            `;
+            
+            confirmPaymentBtn.disabled = true; 
+            updateConfirmButtonState(); 
+            paymentContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        function updateConfirmButtonState() {
+            let enableConfirm = false;
+            if (currentBooking.paymentMethod) {
+                switch (currentBooking.paymentMethod) {
+                    case 'credit':
+                        const cardNumber = document.getElementById('cardNumber').value.trim();
+                        const cardName = document.getElementById('cardName').value.trim();
+                        const expiryDate = document.getElementById('expiryDate').value.trim();
+                        const cvv = document.getElementById('cvv').value.trim();
+                        if (cardNumber && cardName && expiryDate && cvv) {
+                            enableConfirm = true;
+                        }
+                        break;
+                    case 'paypal':
+                        const upiIdVal = document.getElementById('upiId').value.trim();
+                        if (upiIdVal && upiMessage.textContent.includes("Payment request sent")) {
+                            enableConfirm = true;
+                        } else if (!upiIdVal) { 
+                            enableConfirm = true;
+                        }
+                        break;
+                    case 'netbanking':
+                        if (document.getElementById('bankSelect').value) {
+                            enableConfirm = true;
+                        }
+                        break;
+                    case 'wallet':
+                        if (walletMessage.textContent.includes("Proceeding with Wallet")) {
+                            enableConfirm = true;
+                        }
+                        break;
+                }
+            }
+            confirmPaymentBtn.disabled = !enableConfirm;
+        }
+
+
+        paymentMethods.forEach(method => {
+            method.addEventListener('click', function() {
+                paymentMethods.forEach(m => m.classList.remove('selected'));
+                this.classList.add('selected');
+                currentBooking.paymentMethod = this.getAttribute('data-method');
+                
+                creditCardDetails.style.display = (currentBooking.paymentMethod === 'credit') ? 'block' : 'none';
+                paypalDetails.style.display = (currentBooking.paymentMethod === 'paypal') ? 'block' : 'none';
+                netBankingDetails.style.display = (currentBooking.paymentMethod === 'netbanking') ? 'block' : 'none';
+                walletDetails.style.display = (currentBooking.paymentMethod === 'wallet') ? 'block' : 'none';
+                
+                upiMessage.textContent = ''; 
+                walletMessage.textContent = '';
+                updateConfirmButtonState(); 
+            });
+        });
+        
+        ['cardNumber', 'cardName', 'expiryDate', 'cvv'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateConfirmButtonState);
+        });
+        document.getElementById('bankSelect').addEventListener('change', updateConfirmButtonState);
+
+
+        requestUpiPaymentBtn.addEventListener('click', function() {
+            const upiId = document.getElementById('upiId').value.trim();
+            upiMessage.textContent = ''; 
+
+            if (!upiId) {
+                upiMessage.style.color = 'red';
+                upiMessage.textContent = 'Please enter a UPI ID.';
+                updateConfirmButtonState();
+                return;
+            }
+            if (!/^[a-zA-Z0-9.\-_]{2,256}@[a-zA-Z]{2,64}$/.test(upiId)) {
+                 upiMessage.style.color = 'red';
+                 upiMessage.textContent = 'Invalid UPI ID format (e.g., yourname@upi).';
+                 updateConfirmButtonState();
+                 return;
+            }
+            upiMessage.style.color = 'var(--success-color)';
+            upiMessage.textContent = `Payment request sent to ${upiId}. Please complete the payment on your UPI app.`;
+            updateConfirmButtonState();
+        });
+
+        requestWalletPaymentBtn.addEventListener('click', function() {
+            const walletIdEl = document.getElementById('walletId');
+            const walletId = walletIdEl.value.trim();
+            walletMessage.textContent = '';
+
+            if (walletId && !/^[a-zA-Z0-9@.\-_+]{5,}$/.test(walletId) && !/^\d{10}$/.test(walletId)) {
+                 walletMessage.style.color = 'red';
+                 walletMessage.textContent = 'If providing Wallet ID/Phone, please ensure it is valid.';
+                 updateConfirmButtonState();
+                 return;
+            }
+            
+            walletMessage.style.color = 'var(--success-color)';
+            if (walletId) {
+                walletMessage.textContent = `Proceeding with Wallet payment for ${walletId}. Follow instructions in your wallet app.`;
+            } else {
+                walletMessage.textContent = `Proceeding with Wallet payment. Follow instructions in your wallet app.`;
+            }
+            updateConfirmButtonState();
+        });
+
+
+        confirmPaymentBtn.addEventListener('click', function() {
+            if (!currentBooking.paymentMethod) {
+                alert('Please select a payment method');
+                return;
+            }
+            
+            if (currentBooking.paymentMethod === 'credit') {
+                const cardNumber = document.getElementById('cardNumber').value.trim();
+                const cardName = document.getElementById('cardName').value.trim();
+                const expiryDate = document.getElementById('expiryDate').value.trim();
+                const cvv = document.getElementById('cvv').value.trim();
+                
+                if (!cardNumber || !cardName || !expiryDate || !cvv) {
+                    alert('Please fill in all credit card details');
+                    return;
+                }
+                if (!validateCreditCard(cardNumber)) {
+                    alert('Please enter a valid credit card number.');
+                    return;
+                }
+                if (!validateExpiryDate(expiryDate)) {
+                    alert('Please enter a valid expiry date (MM/YY).');
+                    return;
+                }
+                if (!validateCVV(cvv)) {
+                    alert('Please enter a valid CVV (3 or 4 digits).');
+                    return;
+                }
+            } else if (currentBooking.paymentMethod === 'paypal') {
+                const upiIdValue = document.getElementById('upiId').value.trim();
+                if (upiIdValue && !upiMessage.textContent.includes("Payment request sent")) {
+                    alert("Please click 'Request UPI Payment' if using UPI, or clear the UPI ID field for PayPal direct.");
+                    return;
+                } else if (!upiIdValue && !confirm("You have not entered a UPI ID. Proceed with PayPal redirect (simulation)?")) {
+                    return;
+                }
+                 console.log("Proceeding with PayPal/UPI payment confirmation.");
+            } else if (currentBooking.paymentMethod === 'netbanking') {
+                const selectedBank = document.getElementById('bankSelect').value;
+                if (!selectedBank) {
+                    alert('Please select your bank for Net Banking payment.');
+                    return;
+                }
+                console.log(`Simulating Net Banking payment via ${selectedBank}.`);
+            } else if (currentBooking.paymentMethod === 'wallet') {
+                const walletMsgText = walletMessage.textContent;
+                if (!walletMsgText.includes("Proceeding with Wallet")) {
+                    alert("Please click 'Proceed with Wallet' to simulate wallet payment.");
+                    return;
+                }
+                console.log("Simulating Digital Wallet payment completion.");
+            }
+            
+            const bookingRef = 'SF' + Math.floor(10000000 + Math.random() * 90000000);
+            const guestFullName = `${currentBooking.guestInfo.firstName} ${currentBooking.guestInfo.lastName}`;
+            const hotelName = currentBooking.hotel.name;
+            const hotelImage = currentBooking.hotel.image;
+            const roomType = currentBooking.room.type;
+            const roomImage = currentBooking.room.image;
+            const checkInDateVal = currentBooking.checkIn;
+            const checkOutDateVal = currentBooking.checkOut;
+            const nights = Math.ceil(new Date(checkOutDateVal) - new Date(checkInDateVal)) / (1000 * 60 * 60 * 24);
+            const totalPrice = nights * currentBooking.room.price;
+            const bookingDate = new Date().toISOString();
+
+            const assignedRoomNumber = `${currentBooking.room.type.substring(0, 3).toUpperCase()}-${Math.floor(100 + Math.random() * 899)}`;
+            currentBooking.assignedRoomNumber = assignedRoomNumber;
+
+
+            const newBookingData = {
+                bookingRef, guestFullName, hotelName, hotelImage, roomType, roomImage,
+                checkInDate: checkInDateVal, checkOutDate: checkOutDateVal,
+                nights, totalAmount: totalPrice, bookingDate, status: 'Confirmed',
+                roomId: currentBooking.room.id, 
+                assignedRoomNumber: currentBooking.assignedRoomNumber 
+            };
+
+            const currentUserForBooking = JSON.parse(localStorage.getItem('currentUser')); 
+
+            if (currentUserForBooking && currentUserForBooking.email) {
+                const userBookingsKey = `userBookings_${currentUserForBooking.email}`;
+                let userBookings = JSON.parse(localStorage.getItem(userBookingsKey)) || [];
+                userBookings.unshift(newBookingData); 
+                localStorage.setItem(userBookingsKey, JSON.stringify(userBookings));
+            }
+
+
+            document.getElementById('confirmationRef').textContent = bookingRef;
+            document.getElementById('confirmationName').textContent = guestFullName;
+            document.getElementById('confirmationHotel').textContent = hotelName;
+            document.getElementById('confirmationRoom').textContent = 
+                `${roomType} (Type ID: ${currentBooking.room.id}), Assigned Room: ${currentBooking.assignedRoomNumber}`; 
+            document.getElementById('confirmationDates').textContent = 
+                `${formatDate(checkInDateVal)} - ${formatDate(checkOutDateVal)} (${nights} ${nights > 1 ? 'nights' : 'night'})`;
+            document.getElementById('confirmationAmount').textContent = 
+                `₹${totalPrice.toFixed(2)}`;
+            
+            confirmationContainer.style.display = 'block';
+            paymentContainer.style.display = 'none';
+            
+            confirmationContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        downloadConfirmationBtn.addEventListener('click', function() {
+            const { jsPDF } = window.jspdf; 
+            const doc = new jsPDF();
+
+            const ref = document.getElementById('confirmationRef').textContent;
+            const name = document.getElementById('confirmationName').textContent;
+            const hotel = document.getElementById('confirmationHotel').textContent;
+            const roomDetails = document.getElementById('confirmationRoom').textContent; 
+            const dates = document.getElementById('confirmationDates').textContent;
+            const amount = document.getElementById('confirmationAmount').textContent; // This will now have '₹'
+            const bookedOn = new Date().toLocaleString();
+
+            doc.setFontSize(18);
+            doc.text("StayFinder - Booking Confirmation", 10, 20);
+
+            doc.setFontSize(12);
+            doc.text("-------------------------------------------------------------------", 10, 25);
+
+            let yPos = 35;
+            const lineHeight = 7; 
+            const leftMargin = 10;
+            const rightMargin = doc.internal.pageSize.getWidth() - 10; 
+
+            function addText(label, value, y) {
+                doc.setFont("helvetica", "bold");
+                doc.text(label, leftMargin, y);
+                doc.setFont("helvetica", "normal");
+                const valueLines = doc.splitTextToSize(value, rightMargin - leftMargin - doc.getTextWidth(label + "  "));
+                valueLines.forEach((line, index) => {
+                    doc.text(index === 0 ? value : line, leftMargin + doc.getTextWidth(label) + 2, y + (index * (lineHeight -2) )); 
+                });
+                return y + (valueLines.length * (lineHeight - (valueLines.length > 1 ? 2: 0) )) ; 
+            }
+            
+            yPos = addText("Booking Reference:", ref, yPos);
+            yPos = addText("Guest Name:", name, yPos);
+            yPos = addText("Hotel:", hotel, yPos);
+            yPos = addText("Room Details:", roomDetails, yPos); 
+            yPos = addText("Dates:", dates, yPos);
+            yPos = addText("Total Amount:", amount, yPos);
+            yPos += lineHeight / 2; 
+            doc.text("-------------------------------------------------------------------", 10, yPos); yPos += lineHeight;
+            doc.text("Thank you for booking with StayFinder!", 10, yPos); yPos += lineHeight;
+            doc.text(`Booked on: ${bookedOn}`, 10, yPos);
+
+            doc.save(`StayFinder_Booking_${ref}.pdf`);
+        });
+
+
+        function validateCreditCard(number) {
+            number = number.replace(/\D/g, '');
+            if (!/^\d{13,19}$/.test(number)) return false; 
+            
+            let sum = 0;
+            let shouldDouble = false;
+            for (let i = number.length - 1; i >= 0; i--) {
+                let digit = parseInt(number.charAt(i));
+                if (shouldDouble) {
+                    digit *= 2;
+                    if (digit > 9) digit -= 9;
+                }
+                sum += digit;
+                shouldDouble = !shouldDouble;
+            }
+            return (sum % 10) === 0;
+        }
+
+        function validateExpiryDate(date) {
+            if (!/^\d{2}\/\d{2}$/.test(date)) return false;
+            const [month, yearSuffix] = date.split('/').map(Number);
+            if (month < 1 || month > 12) return false;
+            
+            const currentYearFull = new Date().getFullYear();
+            const currentMonth = new Date().getMonth() + 1;
+            const inputYearFull = 2000 + yearSuffix;
+
+            if (inputYearFull < currentYearFull || (inputYearFull === currentYearFull && month < currentMonth)) {
+                return false;
+            }
+            return true;
+        }
+
+        function validateCVV(cvv) {
+            return /^\d{3,4}$/.test(cvv);
+        }
+
+        backToSearchBtn.addEventListener('click', function() {
+            searchForm.reset(); 
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(today.getDate() + 1);
+            const defaultCheckOut = new Date(tomorrow);
+            defaultCheckOut.setDate(tomorrow.getDate() + 2);
+            document.getElementById('checkIn').valueAsDate = tomorrow;
+            document.getElementById('checkOut').valueAsDate = defaultCheckOut;
+            document.getElementById('checkIn').min = today.toISOString().split("T")[0];
+            const nextDayForCheckoutMin = new Date(tomorrow);
+            nextDayForCheckoutMin.setDate(tomorrow.getDate() + 1);
+            document.getElementById('checkOut').min = nextDayForCheckoutMin.toISOString().split("T")[0];
+
+            resultsContainer.style.display = 'none';
+            bookingFormContainer.style.display = 'none';
+            paymentContainer.style.display = 'none';
+            confirmationContainer.style.display = 'none';
+            hotelList.innerHTML = ''; 
+            searchCriteria.innerHTML = ''; 
+            upiMessage.textContent = '';
+            walletMessage.textContent = ''; 
+            document.getElementById('bankSelect').value = ''; 
+            document.getElementById('walletId').value = ''; 
+            document.getElementById('upiId').value = '';
+            ['cardNumber', 'cardName', 'expiryDate', 'cvv'].forEach(id => document.getElementById(id).value = '');
+            currentlyDisplayedHotels = [];
+
+
+            currentBooking = {
+                hotel: null, room: null, assignedRoomNumber: null, checkIn: null, checkOut: null,
+                guests: 2, guestInfo: null, paymentMethod: null
+            };
+            document.getElementById('guests').value = "2"; 
+            document.getElementById('roomType').value = "all";
+            document.getElementById('priceRange').value = "all";
+            sortBy.value = "price-asc"; 
+            
+            paymentMethods.forEach(m => m.classList.remove('selected'));
+            creditCardDetails.style.display = 'none';
+            paypalDetails.style.display = 'none';
+            netBankingDetails.style.display = 'none';
+            walletDetails.style.display = 'none';
+            confirmPaymentBtn.disabled = true;
+
+
+            document.querySelector('.hero').scrollIntoView({ behavior: 'smooth' }); 
+        });
+
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString + 'T00:00:00'); 
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            return date.toLocaleDateString('en-US', options);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Combined Menu Layout with Update Feature</title>
+  <link rel="icon" type="image/png" href="./img/RS.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .hidden {
+      display: none;
+    }
+    
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: block;
+      display: block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-gray-800 to-black text-white h-screen flex">
+
+  <div class="w-1/4 bg-gray-900 p-4 flex flex-col space-y-4">
+    <div class="flex items-center space-x-2">
+      <span class="material-symbols-outlined">home</span>
+      </a><span class="text-white text-lg" id="homeLink">Home</span>
+    </div>
+    <div class="flex items-center space-x-2">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="text-white text-lg">Settings</span>
+    </div>
+    <div class="flex items-center space-x-2 cursor-pointer" id="account">
+      <span class="material-symbols-outlined">person</span>
+      <span class="text-white text-lg">Account</span>
+    </div>
+   <!-- Modify the Order section in the second program's HTML -->
+<div class="flex items-center space-x-2 cursor-pointer" id="orderSection">
+  <span class="material-symbols-outlined">shopping_cart</span>
+  <span class="text-white text-lg">Order</span>
+</div>
+    <div class="flex items-center space-x-2">
+      <span class="material-symbols-outlined">logout</span>
+      <span class="text-white text-lg" id="logoutLink">Logout</span>
+    </div>
+  </div>
+
+  <div class="flex-1 p-4">
+    <div id="account-info" class="hidden">
+      <p class="text-white text-lg">Email: <span class="text-gray-400" id="userEmail"></span></p>
+      <p class="text-white text-lg">Phone: <span class="text-gray-400" id="userPhone"></span></p>
+      <button id="updateButton" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Update Info</button>
+    </div>
+
+    <div id="update-form" class="hidden mt-4">
+      <h2 class="text-white text-lg">Update Your Information</h2>
+      <input type="email" id="newEmail" placeholder="New Email" class="mt-2 p-2 rounded">
+      <input type="text" id="newPhone" placeholder="New Phone" class="mt-2 p-2 rounded">
+      <button id="saveButton" class="mt-2 bg-green-500 text-white px-4 py-2 rounded">Save Changes</button>
+    </div>
+  </div>
+
+
+   
+<!-- Add this order display section -->
+<div id="order-info" class="hidden mt-4 p-4 bg-gray-700 rounded-lg">
+  <h2 class="text-2xl mb-4">Your Cart</h2>
+  <div id="cart-items"></div>
+  <div class="mt-4 text-xl font-bold" id="cart-total">Total: ₹0</div>
+</div>
+
+
+  <script>
+
+    document.getElementById('homeLink').addEventListener('click', function() {
+      window.location.href = "index.html"; // Redirect to login page
+      
+    });
+    // Check if user is logged in
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "index.html"; // Redirect to login if not logged in
+    }
+
+    // Retrieve user data from local storage
+    const userEmail = localStorage.getItem('userEmail');
+    const userPhone = localStorage.getItem('userNumber');
+
+    // Display user data in the HTML
+    document.getElementById('userEmail').textContent = userEmail;
+    document.getElementById('userPhone').textContent = userPhone;
+
+    // Logout functionality
+    document.getElementById('logoutLink').addEventListener('click', function() {
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userNumber');
+      localStorage.setItem('isLoggedIn', 'false'); // Update login state
+      window.location.href = "index.html"; // Redirect to login page
+      
+    });
+
+    // Toggle account info display
+    document.getElementById('account').addEventListener('click', function() {
+      document.getElementById('account-info').classList.toggle('hidden');
+      document.getElementById('update-form').classList.add('hidden'); // Hide update form when account info is shown
+    });
+
+    // Show update form
+    document.getElementById('updateButton').addEventListener('click', function() {
+      document.getElementById('update-form').classList.toggle('hidden');
+    });
+
+    // Save updated user data
+    document.getElementById('saveButton').addEventListener('click', function() {
+      const newEmail = document.getElementById('newEmail').value;
+      const newPhone = document.getElementById('newPhone').value;
+
+      // Update local storage
+      localStorage.setItem('userEmail', newEmail);
+      localStorage.setItem('userNumber', newPhone);
+
+      // Update displayed user data
+      document.getElementById('userEmail').textContent = newEmail;
+      document.getElementById('userPhone').textContent = newPhone;
+
+      // Clear input fields
+      document.getElementById('newEmail').value = '';
+      document.getElementById('newPhone').value = '';
+
+      // Hide update form
+      document.getElementById('update-form').classList.add('hidden');
+    });
+  </script>
+  
+<!-- Add this order display section -->
+<div id="order-info" class="hidden mt-4 p-4 bg-gray-700 rounded-lg">
+  <h2 class="text-2xl mb-4">Your Cart</h2>
+  <div id="cart-items"></div>
+  <div class="mt-4 text-xl font-bold" id="cart-total">Total: ₹0</div>
+</div>
+
+<!-- Update the script section in the second program -->
+<script>
+  // Cart display and management
+  function updateCartDisplay() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    const cartContainer = document.getElementById('cart-items');
+    const totalElement = document.getElementById('cart-total');
+    let total = 0;
+
+    cartContainer.innerHTML = '';
+    
+    cartItems.forEach((item, index) => {
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'flex justify-between items-center mb-2';
+      itemDiv.innerHTML = `
+        <div class="flex-1">
+          <span>${item.name}</span>
+          <div class="flex items-center mt-1">
+            <button class="quantity-btn bg-gray-600 px-2 py-1 rounded" data-index="${index}" data-action="decrease">-</button>
+            <span class="mx-2">${item.quantity}</span>
+            <button class="quantity-btn bg-gray-600 px-2 py-1 rounded" data-index="${index}" data-action="increase">+</button>
+          </div>
+        </div>
+        <div>
+          <span>₹${(item.price * item.quantity).toFixed(2)}</span>
+          <button class="ml-2 text-red-500 remove-btn" data-index="${index}">×</button>
+        </div>
+      `;
+      cartContainer.appendChild(itemDiv);
+      total += item.price * item.quantity;
+    });
+
+    totalElement.textContent = `Total: ₹${total.toFixed(2)}`;
+  }
+
+  // Toggle order display
+  document.getElementById('orderSection').addEventListener('click', function() {
+    document.getElementById('order-info').classList.toggle('hidden');
+    updateCartDisplay();
+  });
+
+  // Handle quantity changes
+  document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('quantity-btn') || e.target.classList.contains('remove-btn')) {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const index = e.target.dataset.index;
+
+      if (e.target.classList.contains('remove-btn')) {
+        cart.splice(index, 1);
+      } else {
+        const action = e.target.dataset.action;
+        if (action === 'increase') {
+          cart[index].quantity++;
+        } else if (action === 'decrease') {
+          cart[index].quantity = Math.max(1, cart[index].quantity - 1);
+        }
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+    }
+  });
+
+  // Initialize cart display
+  updateCartDisplay();
+</script>
+</body>
+</html>

@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <!-- Added Google Fonts for the Auth Form -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Web Design Mastery | Advanto</title>
+
+    <!-- STYLES FOR THE AUTHENTICATION MODAL & NEW USER DROPDOWN -->
+    <style>
+      /* --- Auth Modal Wrapper --- */
+      #auth-wrapper {
+        position: fixed;
+        inset: 0;
+        /* shorthand for top:0, right:0, bottom:0, left:0 */
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        font-family: "Poppins", sans-serif;
+        /* Set font for the modal */
+      }
+
+      #auth-wrapper.hidden {
+        display: none;
+      }
+
+      /* --- GLOBAL STYLES (Scoped to .auth-container) --- */
+      .auth-container * {
+        box-sizing: border-box;
+      }
+
+      .auth-container h1 {
+        font-weight: 700;
+        margin: 0 0 10px;
+        font-size: 2.2rem;
+        color: #333; /* Ensure text color is set */
+      }
+
+      .auth-container p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        margin: 20px 0 30px;
+      }
+
+      .auth-container a {
+        color: #333;
+        font-size: 14px;
+        text-decoration: none;
+        margin: 15px 0;
+      }
+
+      .auth-container button {
+        border-radius: 20px;
+        border: 1px solid #01bbbf;
+        background-color: #01bbbf;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: bold;
+        padding: 12px 45px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: transform 80ms ease-in;
+        cursor: pointer;
+      }
+
+      .auth-container button:active {
+        transform: scale(0.95);
+      }
+
+      .auth-container button:focus {
+        outline: none;
+      }
+
+      .auth-container button.ghost {
+        background-color: transparent;
+        border-color: #ffffff;
+      }
+
+      /* --- AUTHENTICATION VIEW STYLES --- */
+      .auth-container {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+          0 10px 10px rgba(0, 0, 0, 0.22);
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        max-width: 768px;
+        min-height: 520px;
+      }
+
+      .auth-container form {
+        background-color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 50px;
+        height: 100%;
+        text-align: center;
+      }
+
+      .auth-container input {
+        background-color: #eee;
+        border: none;
+        padding: 12px 15px;
+        margin: 8px 0;
+        width: 100%;
+        border-radius: 5px;
+      }
+
+      .form-container {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        transition: all 0.6s ease-in-out;
+      }
+
+      .sign-in-container {
+        left: 0;
+        width: 50%;
+        z-index: 2;
+      }
+
+      .sign-up-container {
+        left: 0;
+        width: 50%;
+        opacity: 0;
+        z-index: 1;
+      }
+
+      .overlay-container {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 50%;
+        height: 100%;
+        overflow: hidden;
+        transition: transform 0.6s ease-in-out;
+        z-index: 100;
+      }
+
+      .overlay {
+        background: linear-gradient(to right, #01bbbf, #01bbbf);
+        color: #ffffff;
+        position: relative;
+        left: -100%;
+        height: 100%;
+        width: 200%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+      }
+
+      .overlay-panel {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 40px;
+        text-align: center;
+        top: 0;
+        height: 100%;
+        width: 50%;
+        transform: translateX(0);
+        transition: transform 0.6s ease-in-out;
+      }
+
+      .overlay-left {
+        transform: translateX(-20%);
+      }
+
+      .overlay-right {
+        right: 0;
+        transform: translateX(0);
+      }
+
+      /* Animation Classes for Sliding Panel */
+      .auth-container.right-panel-active .sign-in-container {
+        transform: translateX(100%);
+      }
+
+      .auth-container.right-panel-active .overlay-container {
+        transform: translateX(-100%);
+      }
+
+      .auth-container.right-panel-active .sign-up-container {
+        transform: translateX(100%);
+        opacity: 1;
+        z-index: 5;
+        animation: show 0.6s;
+      }
+
+      .auth-container.right-panel-active .overlay {
+        transform: translateX(50%);
+      }
+
+      .auth-container.right-panel-active .overlay-left {
+        transform: translateX(0);
+      }
+
+      .auth-container.right-panel-active .overlay-right {
+        transform: translateX(20%);
+      }
+
+      @keyframes show {
+        0%,
+        49.99% {
+          opacity: 0;
+          z-index: 1;
+        }
+
+        50%,
+        100% {
+          opacity: 1;
+          z-index: 5;
+        }
+      }
+
+      /* --- USER AVATAR & DROPDOWN STYLES --- */
+      .nav__links .user-auth-li {
+        position: relative; /* Needed for dropdown positioning */
+      }
+      
+      .nav__links .btn {
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .nav__links .user-avatar-btn {
+        background-color: #01bbbf;
+        color: white;
+        padding: 0; /* Remove default padding from .btn */
+        width: 40px; /* Circle size */
+        height: 40px; /* Circle size */
+        border-radius: 50%;
+        font-size: 18px; /* Letter size */
+        font-weight: bold;
+        text-transform: uppercase;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid #01bbbf;
+        transition: background-color 0.3s ease, border-color 0.3s ease;
+        cursor: pointer;
+      }
+
+      /* Override hover effects from .btn */
+      .nav__links .user-avatar-btn:hover {
+        background-color: #019a9d;
+        border-color: #019a9d;
+        transform: none; /* Prevent scaling if .btn has it */
+      }
+
+      /* --- NEW: STYLES FOR THE USER DROPDOWN MENU --- */
+      .user-dropdown-menu {
+        position: absolute;
+        top: 130%; /* Position below the avatar button */
+        right: 0;
+        width: 260px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        z-index: 2000;
+        font-family: "Poppins", sans-serif;
+        overflow: hidden;
+        border: 1px solid #e9e9e9;
+        
+        /* Animation */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+      }
+
+      .user-dropdown-menu.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-header {
+        padding: 15px 20px;
+        background-color: #f7f7f7;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+      .dropdown-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #01bbbf;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+        flex-shrink: 0;
+      }
+      .dropdown-user-info p {
+        margin: 0;
+        font-size: 12px;
+        color: #666;
+      }
+      #dropdown-user-email {
+        font-weight: 600;
+        font-size: 14px;
+        color: #333;
+        word-break: break-all;
+      }
+
+      .dropdown-nav {
+        list-style: none;
+        padding: 10px 0;
+        margin: 0;
+        border-top: 1px solid #e9e9e9;
+        border-bottom: 1px solid #e9e9e9;
+      }
+      .dropdown-nav a {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #333;
+        font-size: 15px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+      .dropdown-nav a i {
+        font-size: 20px;
+        width: 24px;
+        text-align: center;
+        color: #01bbbf;
+      }
+      .dropdown-nav a:hover {
+        background-color: #f0f0f0;
+      }
+
+      .dropdown-footer {
+        padding: 10px;
+      }
+      #dropdown-logout-btn {
+        background-color: transparent;
+        color: #dc3545;
+        border: none;
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+        transition: background-color 0.3s ease;
+      }
+      #dropdown-logout-btn i {
+         font-size: 20px;
+         width: 24px;
+         text-align: center;
+      }
+      #dropdown-logout-btn:hover {
+        background-color: #fdf2f3;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav__header">
+        <div class="nav__logo">
+          <a href="#">
+            <img src="assets/logo.png" alt="logo" />
+          </a>
+        </div>
+        <div class="nav__menu__btn" id="menu-btn">
+          <i class="ri-menu-3-line"></i>
+        </div>
+      </div>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tour">Tours</a></li>
+        <!-- MODIFIED: Wrapper LI for auth button and dropdown -->
+        <li class="user-auth-li">
+          <button class="btn" id="auth-trigger-btn">Login/sign up</button>
+          
+          <!-- NEW: USER DROPDOWN MENU HTML (replaces the old sidebar) -->
+          <div class="user-dropdown-menu" id="user-dropdown-menu">
+            <div class="dropdown-header">
+              <div class="dropdown-avatar" id="dropdown-avatar-letter"></div>
+              <div class="dropdown-user-info">
+                <p>Logged in as</p>
+                <span id="dropdown-user-email">user@example.com</span>
+              </div>
+            </div>
+            <ul class="dropdown-nav">
+              <li><a href="#"><i class="ri-user-line"></i> My Profile</a></li>
+              <li><a href="#"><i class="ri-briefcase-4-line"></i> My Bookings</a></li>
+              <li><a href="#"><i class="ri-settings-3-line"></i> Settings</a></li>
+            </ul>
+            <div class="dropdown-footer">
+              <button id="dropdown-logout-btn">
+                <i class="ri-logout-box-r-line"></i> Logout
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Page Content (omitted for brevity, remains unchanged) -->
+    <header class="section__container header__container" id="home">
+      <div class="header__image">
+        <img src="assets/header.png" alt="header" />
+      </div>
+      <div class="header__content">
+        <img src="assets/plane.png" alt="plane" />
+        <h1>Explore The World And Enjoy Your Trip</h1>
+        <p class="section__description">
+          Discover breathtaking destinations and create unforgettable memories
+          with Advanto. From scenic landscapes to vibrant cities, your next
+          adventure awaits. Let's make your dream trip a reality!
+        </p>
+        <form action="/">
+          <div class="input__group">
+            <label for="location">
+              <span><i class="ri-map-pin-line"></i></span> Location
+            </label>
+            <input
+              type="text"
+              name="location"
+              placeholder="Sahara Desert, Algeria"
+            />
+          </div>
+          <div class="input__group">
+            <label for="date">
+              <span><i class="ri-calendar-line"></i></span> Date
+            </label>
+            <input
+              type="text"
+              name="location"
+              placeholder="18th, December 2024"
+            />
+          </div>
+          <button class="btn">
+            <i class="ri-search-line"></i>
+          </button>
+        </form>
+      </div>
+    </header>
+
+    <section class="about" id="about">
+      <div class="section__container about__container">
+        <div class="about__image">
+          <img src="assets/about.jpg" alt="about" />
+        </div>
+        <div class="about__content">
+          <h2 class="section__header">
+            It's Time For a <span>New Adventure!</span> Don't Wait Any Longer.
+          </h2>
+          <p class="section__description">
+            At Advanto, we believe every journey is a story waiting to be told.
+            Whether you're seeking the tranquility of nature, the charm of
+            historic cities, or the excitement of new cultures, we're here to
+            turn your travel dreams into reality. So why wait? Pack your bags,
+            step out of your comfort zone, and let Advanto guide you to your
+            next great experience!
+          </p>
+          <div class="about__signature">Howard</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container tour__container" id="tour">
+      <h3 class="section__subheader">Tour Type</h3>
+      <h2 class="section__header">Pick A Tour Type</h2>
+      <div class="tour__grid">
+        <div class="tour__card">
+          <img src="assets/tour-1.jpg" alt="tour" />
+          <h4>Forest Adventures</h4>
+          <p>15 Tours+</p>
+        </div>
+        <div class="tour__card">
+          <img src="assets/tour-2.jpg" alt="tour" />
+          <h4>Mountain Climbing</h4>
+          <p>10 Tours+</p>
+        </div>
+        <div class="tour__card">
+          <img src="assets/tour-3.jpg" alt="tour" />
+          <h4>Beach Vacations</h4>
+          <p>18 Tours+</p>
+        </div>
+        <div class="tour__card">
+          <img src="assets/tour-4.jpg" alt="tour" />
+          <h4>City Tours</h4>
+          <p>12 Tours+</p>
+        </div>
+      </div>
+      <div class="tour__btn">
+        <button class="btn">
+          Show All
+          <span><i class="ri-arrow-right-long-line"></i></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="destination">
+      <div class="section__container destination__container">
+        <h3 class="section__subheader">Top Destination</h3>
+        <h2 class="section__header">Our Top Destinations</h2>
+        <div class="destination__grid">
+          <div class="destination__card">
+            <img src="assets/destination-1.jpg" alt="destination" />
+            <div class="destination__card__content">
+              <h4>Enjoy the tour of the City of Love</h4>
+              <h5>Paris, France</h5>
+              <div class="destination__card__footer">
+                <h6>₹90000</h6>
+                <p>(6 days)</p>
+              </div>
+            </div>
+          </div>
+          <div class="destination__card">
+            <img src="assets/destination-2.jpg" alt="destination" />
+            <div class="destination__card__content">
+              <h4>Enjoy the tour of paradise with pristine beaches</h4>
+              <h5>Bali, Indonesia</h5>
+              <div class="destination__card__footer">
+                <h6>₹35000</h6>
+                <p>(7 days)</p>
+              </div>
+            </div>
+          </div>
+          <div class="destination__card">
+            <img src="assets/destination-3.jpg" alt="destination" />
+            <div class="destination__card__content">
+              <h4>Enjoy the tour of luxury and innovation</h4>
+              <h5>Dubai, UAE</h5>
+              <div class="destination__card__footer">
+                <h6>₹25000</h6>
+                <p>(5 days)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="destination__btn">
+          <button class="btn">
+            Show All
+            <span><i class="ri-arrow-right-long-line"></i></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container review__container">
+      <div class="review__image">
+        <img src="assets/review.png" alt="review" />
+      </div>
+      <div class="review__content">
+        <h3 class="section__subheader">Top Reviews</h3>
+        <h2 class="section__header">Our Valuable Clients Say Abour Us</h2>
+        <!-- Slider main container -->
+        <div class="swiper">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <div class="review__card">
+                <span><i class="ri-double-quotes-l"></i></span>
+                <p class="section__description">
+                  Advanto made my dream vacation a reality! From the moment I
+                  started planning, their team provided excellent
+                  recommendations and tailored my itinerary to perfection. Every
+                  experience felt personalized, and I loved how seamless the
+                  entire journey was.
+                </p>
+                <h4>Emily Roberts</h4>
+                <h5>Travel Blogger</h5>
+                <div>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="review__card">
+                <span><i class="ri-double-quotes-l"></i></span>
+                <p class="section__description">
+                  Exploring new destinations with Advanto was a game-changer. As
+                  a photographer, I'm always looking for breathtaking views and
+                  unique cultural experiences. Advanto didn't disappoint! From
+                  scenic landscapes to vibrant local markets, every destination
+                  was a delight to capture.
+                </p>
+                <h4>Michael Johnson</h4>
+                <h5>Photographer</h5>
+                <div>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="review__card">
+                <span><i class="ri-double-quotes-l"></i></span>
+                <p class="section__description">
+                  I've traveled a lot for work, but Advanto gave me the
+                  opportunity to enjoy a stress-free vacation. Their attention
+                  to detail was remarkable, ensuring everything from airport
+                  transfers to guided tours was perfectly arranged. The
+                  personalized itinerary was well-balanced with adventure and
+                  relaxation!
+                </p>
+                <h4>Sophia Lee</h4>
+                <h5>Business Consultant</h5>
+                <div>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                  <span><i class="ri-star-fill"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blog">
+      <div class="section__container blog__container">
+        <h3 class="section__subheader">Latest News & Blogs</h3>
+        <h2 class="section__header">Our Latest News & Blogs</h2>
+        <div class="blog__grid">
+          <div class="blog__card">
+            <img src="assets/blog-1.jpg" alt="blog" />
+            <div class="blog__content">
+              <h4>Top 10 Must-Visit Destinations for Your Next Adventure</h4>
+              <button class="btn">
+                Read More
+                <span><i class="ri-arrow-right-long-line"></i></span>
+              </button>
+            </div>
+          </div>
+          <div class="blog__card">
+            <img src="assets/blog-2.jpg" alt="blog" />
+            <div class="blog__content">
+              <h4>Travel Smart: Essential Tips for Stress-Free Vacations</h4>
+              <button class="btn">
+                Read More
+                <span><i class="ri-arrow-right-long-line"></i></span>
+              </button>
+            </div>
+          </div>
+          <div class="blog__card">
+            <img src="assets/blog-3.jpg" alt="blog" />
+            <div class="blog__content">
+              <h4>
+                Hidden Gems: Discover Offbeat Locations for Unique Experience
+              </h4>
+              <button class="btn">
+                Read More
+                <span><i class="ri-arrow-right-long-line"></i></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="blog__btn">
+          <button class="btn">
+            Show All
+            <span><i class="ri-arrow-right-long-line"></i></span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="banner">
+      <div class="banner__wrapper">
+        <img src="assets/banner-1.jpg" alt="banner" />
+        <img src="assets/banner-2.jpg" alt="banner" />
+        <img src="assets/banner-3.jpg" alt="banner" />
+        <img src="assets/banner-4.jpg" alt="banner" />
+        <img src="assets/banner-5.jpg" alt="banner" />
+        <img src="assets/banner-6.jpg" alt="banner" />
+        <img src="assets/banner-7.jpg" alt="banner" />
+        <img src="assets/banner-8.jpg" alt="banner" />
+      </div>
+    </section>
+
+    <footer id="contact">
+      <div class="section__container footer__container">
+        <div class="footer__logo">
+          <img src="assets/logo.png" alt="logo" />
+        </div>
+        <ul class="footer__links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#tour">Tours</a></li>
+          <li><a href="#contact">Contacts</a></li>
+        </ul>
+        <ul class="footer__socials">
+          <li>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-instagram-line"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="ri-linkedin-fill"></i></a>
+          </li>
+        </ul>
+      </div>
+      <div class="footer__bar">
+        Copyright © 2025 Web Design Mastery. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- AUTHENTICATION MODAL HTML -->
+    <div id="auth-wrapper" class="hidden">
+      <div id="auth-container" class="auth-container">
+        <!-- Sign Up Form -->
+        <div class="form-container sign-up-container">
+          <form id="register-form">
+            <h1>Create Account</h1>
+            <input type="email" id="register-email" placeholder="Email (@gmail.com only)" required />
+            <input type="tel" id="register-phone" placeholder="10-Digit Phone Number" required maxlength="10" pattern="\d{10}" title="Phone number must be exactly 10 digits." />
+            <input type="password" id="register-password" placeholder="Password" required />
+            <button type="submit">Sign Up</button>
+          </form>
+        </div>
+
+        <!-- Sign In Form -->
+        <div class="form-container sign-in-container">
+          <form id="login-form">
+            <h1>Login</h1>
+            <input type="email" id="login-email" placeholder="Email" required />
+            <input type="password" id="login-password" placeholder="Password" required />
+            <a href="#">Forgot your password?</a>
+            <button type="submit">Login</button>
+          </form>
+        </div>
+
+        <!-- Sliding Overlay -->
+        <div class="overlay-container">
+          <div class="overlay">
+            <div class="overlay-panel overlay-left">
+              <h1>Welcome Back!</h1>
+              <p>To keep connected with us please login with your personal info</p>
+              <button class="ghost" id="signIn">Sign In</button>
+            </div>
+            <div class="overlay-panel overlay-right">
+              <h1>Hello, Friend!</h1>
+              <p>Enter your personal details and start your journey with us</p>
+              <button class="ghost" id="signUp">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODIFIED: Sidebar HTML has been removed from here -->
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+
+    <!-- SCRIPT FOR AUTHENTICATION & DROPDOWN LOGIC -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // --- DOM Element References ---
+        const authTriggerBtn = document.getElementById("auth-trigger-btn");
+        const authWrapper = document.getElementById("auth-wrapper");
+        const authContainer = document.getElementById("auth-container");
+        const signUpButton = document.getElementById("signUp");
+        const signInButton = document.getElementById("signIn");
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
+        
+        // MODIFIED: References for the new dropdown menu
+        const userDropdown = document.getElementById("user-dropdown-menu");
+        const dropdownLogoutBtn = document.getElementById("dropdown-logout-btn");
+        const dropdownAvatarLetter = document.getElementById("dropdown-avatar-letter");
+        const dropdownUserEmail = document.getElementById("dropdown-user-email");
+
+
+        // --- View Management ---
+        const showAuthModal = () => authWrapper.classList.remove("hidden");
+        const hideAuthModal = () => authWrapper.classList.add("hidden");
+
+        // MODIFIED: Functions to control the dropdown menu
+        const showDropdown = () => userDropdown.classList.add("open");
+        const hideDropdown = () => userDropdown.classList.remove("open");
+        const toggleDropdown = () => userDropdown.classList.toggle("open");
+        
+        // MODIFIED: This function now updates the nav button and populates the dropdown.
+        const updateUIAfterLogin = (userEmail) => {
+          const firstLetter = userEmail.charAt(0).toUpperCase();
+
+          // 1. Update the main navigation button to be an avatar
+          authTriggerBtn.textContent = firstLetter;
+          authTriggerBtn.classList.remove("btn");
+          authTriggerBtn.classList.add("user-avatar-btn");
+          authTriggerBtn.title = `Logged in as ${userEmail}. Click to open menu.`;
+          authTriggerBtn.dataset.isLoggedIn = "true";
+
+          // 2. Pre-populate the dropdown with the user's information
+          dropdownAvatarLetter.textContent = firstLetter;
+          dropdownUserEmail.textContent = userEmail;
+        };
+
+        const updateUIAfterLogout = () => {
+          // Update nav button back to default
+          authTriggerBtn.textContent = "Login/sign up";
+          authTriggerBtn.classList.add("btn");
+          authTriggerBtn.classList.remove("user-avatar-btn");
+          authTriggerBtn.title = "Login or Sign Up";
+          authTriggerBtn.dataset.isLoggedIn = "false";
+          
+          // Clear dropdown info
+          dropdownAvatarLetter.textContent = '';
+          dropdownUserEmail.textContent = '';
+        };
+
+        // --- Authentication & UI Logic ---
+        const handleLogout = () => {
+          fetch('api/logout.php')
+            .then(res => res.json())
+            .then(data => {
+              alert(data.message);
+              if (data.status === 'success') {
+                hideDropdown(); // Hide the dropdown on logout
+                updateUIAfterLogout();
+              }
+            })
+            .catch(error => console.error('Logout failed:', error));
+        };
+
+        // This function runs on page load to check the session
+        const checkAuthStatus = () => {
+          fetch('api/check_session.php')
+            .then(res => res.json())
+            .then(data => {
+              if (data.isLoggedIn) {
+                updateUIAfterLogin(data.user_email);
+              } else {
+                updateUIAfterLogout();
+              }
+            })
+            .catch(error => console.error('Session check failed:', error));
+        };
+
+        // --- Event Listeners ---
+        signUpButton.addEventListener("click", () => authContainer.classList.add("right-panel-active"));
+        signInButton.addEventListener("click", () => authContainer.classList.remove("right-panel-active"));
+
+        // MODIFIED: Auth button toggles dropdown if logged in, otherwise shows modal.
+        authTriggerBtn.addEventListener("click", (e) => {
+          e.stopPropagation(); // Prevent this click from being caught by the window listener
+          if (authTriggerBtn.dataset.isLoggedIn === "true") {
+            toggleDropdown();
+          } else {
+            showAuthModal();
+          }
+        });
+
+        authWrapper.addEventListener("click", (e) => {
+          if (e.target === authWrapper) hideAuthModal();
+        });
+
+        dropdownLogoutBtn.addEventListener("click", handleLogout);
+        
+        // NEW: Add a window click listener to close the dropdown when clicking outside
+        window.addEventListener('click', (e) => {
+            if (userDropdown.classList.contains('open')) {
+                // If the click is not on the dropdown itself, close it.
+                // The trigger button's click is already handled to toggle, so we don't need to check for it here.
+                if (!userDropdown.contains(e.target)) {
+                    hideDropdown();
+                }
+            }
+        });
+
+
+        // Registration Logic (Unchanged)
+        registerForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const formData = new FormData(registerForm);
+          formData.append('email', document.getElementById('register-email').value);
+          formData.append('phone', document.getElementById('register-phone').value);
+          formData.append('password', document.getElementById('register-password').value);
+
+          fetch('api/register.php', { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+              alert(data.message);
+              if (data.status === 'success') {
+                registerForm.reset();
+                authContainer.classList.remove("right-panel-active");
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert("An error occurred during registration.");
+            });
+        });
+
+        // MODIFIED: Login logic updates the UI and populates dropdown on success
+        loginForm.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const formData = new FormData(loginForm);
+          formData.append('email', document.getElementById('login-email').value);
+          formData.append('password', document.getElementById('login-password').value);
+          
+          fetch('api/login.php', { method: 'POST', body: formData })
+            .then(response => response.json())
+            .then(data => {
+              alert(data.message);
+              if (data.status === 'success') {
+                hideAuthModal();
+                updateUIAfterLogin(data.user_email); 
+              }
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              alert("An error occurred during login.");
+            });
+        });
+
+        // --- Initial Application Load ---
+        checkAuthStatus();
+      });
+    </script>
+  </body>
+</html>

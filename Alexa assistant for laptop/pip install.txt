@@ -1,0 +1,19 @@
+Open the command prompt or a Powershell and type following Command:
+
+pip install requests
+pip install speechrecognition
+pip install pyttsx3
+pip install pyaudio
+pip install pvporcupine
+pip install wikipediaapi
+pip install pywhatkit
+pip install pyautogui
+
+
+
+note: after installing all pip also not running means there will be some pip installations incomplete like ex: Traceback (most recent call last):
+  File "C:\Users\vinay\OneDrive\Desktop\Python\aura_assistant.py", line 5, in <module>
+    import requests
+ModuleNotFoundError: No module named 'requests'//this is not install//
+
+	requests is not install so type on command and install module by pip install requests

@@ -1,0 +1,12 @@
+1.picovoice console ai
+	.signup to picovoice console for free 
+	.There will be a APIkey copy and paste to the Alexa code in PICOVOICE_ACCESS_KEY ""
+	.go to Porcupine(wake word) select Language and type which assistant you want and download it as a windows with 
+	.save it in Python folder inside and replace your ppn file into Alexa_en_windows_v3_0_0.ppn 
+
+2.openwaether ai
+	.signup to openwaether for free
+	.after login go to accessAPI and copy key and paste in OPENWEATHER_API_KEY ""
+3.newsapi.ai
+	.signup to newsapi for free
+	.after login there wil be a API key copy and paste in NEWS_API_KEY ""

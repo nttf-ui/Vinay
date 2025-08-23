@@ -38,7 +38,7 @@ def speak(text):
 
 # 2. Initialize Wake Word Engine
 # --- SECURITY WARNING: YOUR KEYS WERE REMOVED. PLEASE USE PLACEHOLDERS. ---
-PICOVOICE_ACCESS_KEY = "zV9QA/k5DAFuoA/tBHnlJBQ+X0im8Rsfdqvl0cKwPVazzGt2qL7bGg=="
+PICOVOICE_ACCESS_KEY = ""    //Add picovioce_API_Key
 porcupine = None
 pa = None
 audio_stream = None
@@ -51,8 +51,8 @@ wiki_wiki = wikipediaapi.Wikipedia(
 
 # --- API KEYS ---
 # --- SECURITY WARNING: YOUR KEYS WERE REMOVED. PLEASE USE PLACEHOLDERS. ---
-OPENWEATHER_API_KEY = "04f8d95f7dfa8e6e9c9e638c3355ca4e"
-NEWS_API_KEY = "bbb75ac7efca441783e975c116f63358"
+OPENWEATHER_API_KEY = ""    // ADD OPENWEATHER_API_KEY
+NEWS_API_KEY = ""   // ADD NEWSAPI_API_KEY
 
 
 def take_command():
